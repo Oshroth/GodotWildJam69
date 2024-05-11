@@ -1,24 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://bprb7matuusms"]
+[gd_scene load_steps=7 format=3 uid="uid://bprb7matuusms"]
 
 [ext_resource type="PackedScene" uid="uid://b37stw47hpr2x" path="res://3DArt/Models/ArcherTower.gltf" id="1_exp8m"]
+[ext_resource type="PackedScene" uid="uid://snwpf8y8obo1" path="res://3DArt/Models/void_wizard.gltf" id="2_kftu0"]
+[ext_resource type="Animation" uid="uid://l48rarvd4aba" path="res://3DArt/Animations/Player/idle.res" id="3_vbhjb"]
+[ext_resource type="Animation" uid="uid://dun5ncyvrk1dn" path="res://3DArt/Animations/Player/walk.res" id="4_daak2"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_771gt"]
+_data = {
+"idle": ExtResource("3_vbhjb"),
+"walk": ExtResource("4_daak2")
+}
+
 [node name="TestLevel" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.489611, -0.5, -0.424015, 0.755123, 5.38392, 6.10071, 8.77524)
+transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.48961, -0.5, -0.424015, 0.755123, 5.38392, 6.10071, 8.77524)
 projection = 1
-size = 5.505
+size = 11.811
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-size = Vector3(13.9951, 1, 15.5918)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0178865, 0, 0.58374)
+size = Vector3(15.2939, 1, 12.5674)
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_exp8m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.512447, 0)
+transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, -0.00318289, 0.524172, -0.784636)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6w507")
+
+[node name="blockbench_export2" parent="." instance=ExtResource("2_kftu0")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0.779423, 0.550815, 1.68376)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="blockbench_export2"]
+libraries = {
+"player": SubResource("AnimationLibrary_771gt")
+}
+autoplay = "player/idle"
+speed_scale = 2.0
