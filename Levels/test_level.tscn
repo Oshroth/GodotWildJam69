@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bprb7matuusms"]
+
+[ext_resource type="PackedScene" uid="uid://b37stw47hpr2x" path="res://3DArt/Models/ArcherTower.gltf" id="1_exp8m"]
+
+[sub_resource type="Environment" id="Environment_6w507"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.489611, -0.5, -0.424015, 0.755123, 5.38392, 6.10071, 8.77524)
+projection = 1
+size = 5.505
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(13.9951, 1, 15.5918)
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_exp8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.512447, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6w507")
