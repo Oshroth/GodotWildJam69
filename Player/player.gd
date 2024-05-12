@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var animation_player = $AnimationPlayer
 
 
-var speed:int = 200
+var speed:int = 400
 
 func _physics_process(delta):
 	
