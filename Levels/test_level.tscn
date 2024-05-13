@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bprb7matuusms"]
+[gd_scene load_steps=16 format=3 uid="uid://bprb7matuusms"]
 
 [ext_resource type="PackedScene" uid="uid://b37stw47hpr2x" path="res://3DArt/Models/ArcherTower.gltf" id="1_exp8m"]
 [ext_resource type="PackedScene" uid="uid://dd4lqcr3dl65m" path="res://Player/player.tscn" id="3_fw4h6"]
@@ -9,12 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://rjr47kyess0n" path="res://3DArt/Models/TreeTower.gltf" id="6_p5xa5"]
 [ext_resource type="PackedScene" uid="uid://coscxpwfvngne" path="res://3DArt/Models/FalconArcher.gltf" id="7_jdjaa"]
 [ext_resource type="PackedScene" uid="uid://c1mvs4rowc7xb" path="res://3DArt/Models/feather_projectile.gltf" id="8_542uu"]
+[ext_resource type="Shader" path="res://Shaders/FilmGrain.gdshader" id="10_uitym"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
 background_color = Color(0.109804, 0.105882, 0.223529, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+fog_light_color = Color(0.109804, 0.105882, 0.223529, 1)
+fog_density = 0.05
 
 [sub_resource type="Curve" id="Curve_rmvjn"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498084, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0286168), 0.0, 0.0, 0, 0]
@@ -34,6 +37,12 @@ tangential_accel_max = 3.0
 scale_min = 1.5
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_jsqpm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2fqi"]
+shader = ExtResource("10_uitym")
+shader_parameter/grain_amount = 0.02
+shader_parameter/grain_size = 1.0
+shader_parameter/target_color = Color(0.109804, 0.105882, 0.223529, 1)
 
 [node name="TestLevel" type="Node3D"]
 
@@ -96,3 +105,13 @@ transform = Transform3D(-0.439158, 0, -1.11675, 0, 1.2, 0, 1.11675, 0, -0.439158
 
 [node name="blockbench_export8" parent="." instance=ExtResource("8_542uu")]
 transform = Transform3D(-1.53971e-07, 9.99864e-08, -4.2, 2.28742, 3.52246, 0, 3.52246, -2.28742, -1.83588e-07, 2.49316, 3.84775, 1.36983)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_b2fqi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
