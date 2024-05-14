@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bprb7matuusms"]
+[gd_scene load_steps=17 format=3 uid="uid://bprb7matuusms"]
 
 [ext_resource type="PackedScene" uid="uid://b37stw47hpr2x" path="res://3DArt/Models/ArcherTower.gltf" id="1_exp8m"]
 [ext_resource type="PackedScene" uid="uid://dd4lqcr3dl65m" path="res://Player/player.tscn" id="3_fw4h6"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://rjr47kyess0n" path="res://3DArt/Models/TreeTower.gltf" id="6_p5xa5"]
 [ext_resource type="PackedScene" uid="uid://coscxpwfvngne" path="res://3DArt/Models/FalconArcher.gltf" id="7_jdjaa"]
 [ext_resource type="PackedScene" uid="uid://c1mvs4rowc7xb" path="res://3DArt/Models/feather_projectile.gltf" id="8_542uu"]
+[ext_resource type="Script" path="res://Shaders/GrainHelper.gd" id="10_0gqws"]
 [ext_resource type="Shader" path="res://Shaders/FilmGrain.gdshader" id="10_uitym"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
@@ -68,7 +69,7 @@ transform = Transform3D(-0.195797, 0, 2.19127, 0, 2.2, 0, -2.19127, 0, -0.195797
 transform = Transform3D(0.92607, 0, 1.99559, 0, 2.2, 0, -1.99559, 0, 0.92607, 6.1263, 0.4875, 3.12277)
 
 [node name="Player" parent="." instance=ExtResource("3_fw4h6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31654, 0.6, 6.66592)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.48961, -0.5, -0.424015, 0.755123, 5.38392, 5.50071, 5.77524)
@@ -88,7 +89,7 @@ draw_pass_1 = ExtResource("4_ahymr")
 mesh_library = ExtResource("4_3prrn")
 cell_size = Vector3(3.2, 1, 3.2)
 data = {
-"cells": PackedInt32Array(-65536, 65534, 655360, -65536, 65535, 655360, -65536, 0, 655360, -65536, 1, 655360, -65536, 2, 655360, -65535, 65534, 655360, -65535, 65535, 655360, -65535, 0, 655360, -65535, 1, 655360, -65535, 2, 655360, -2, 65534, 655360, -2, 65535, 655360, -2, 0, 655360, -2, 1, 655360, -2, 2, 655360, -1, 65534, 655360, -1, 65535, 655360, -1, 0, 655360, -1, 1, 655360, -1, 2, 655360, -2, 65533, 655360, -1, 65533, 655360, -65536, 65533, 655360, -65535, 65533, 655360, -65534, 65533, 655360, -65534, 65534, 655360, -65534, 65535, 655360, -65534, 0, 655360, -65534, 1, 655360, -65534, 2, 655360, -3, 65533, 0, -3, 65534, 0, -3, 65535, 0, -4, 65535, 0, -4, 0, 0, -4, 1, 0, -3, 1, 0, -3, 0, 0, -3, 2, 0, -4, 2, 0, -4, 65534, 0, -4, 65533, 0, -4, 65532, 0)
+"cells": PackedInt32Array(-65536, 65534, 655360, -65536, 65535, 655360, -65536, 0, 655360, -65536, 1, 655360, -65536, 2, 655360, -65535, 65534, 655360, -65535, 65535, 655360, -65535, 0, 655360, -65535, 1, 655360, -65535, 2, 655360, -2, 65534, 655360, -2, 65535, 655360, -2, 0, 655360, -2, 1, 655360, -2, 2, 655360, -1, 65534, 655360, -1, 65535, 655360, -1, 1, 655360, -1, 2, 655360, -2, 65533, 655360, -1, 65533, 655360, -65536, 65533, 655360, -65535, 65533, 655360, -65534, 65534, 655360, -65534, 65535, 655360, -65534, 0, 655360, -65534, 1, 655360, -65534, 2, 655360, -3, 65533, 0, -3, 65534, 0, -3, 65535, 0, -4, 65535, 0, -4, 0, 0, -4, 1, 0, -3, 1, 0, -3, 0, 0, -3, 2, 0, -4, 2, 0, -4, 65534, 0, -4, 65533, 0, -4, 65532, 0)
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
@@ -96,10 +97,10 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 transform = Transform3D(-5.46, 0, 4.77328e-07, 0, 5.46, 0, -4.77328e-07, 0, -5.46, -9.34451, 0, -3.87649)
 
 [node name="blockbench_export6" parent="." instance=ExtResource("6_p5xa5")]
-transform = Transform3D(3.36644, 0, -0.381594, 0, 3.388, 0, 0.381594, 0, 3.36644, 0, 0, 0)
+transform = Transform3D(3.38621, 0, 0.110024, 0, 3.388, 0, -0.110024, 0, 3.38621, -1.59754, 0, 1.63175)
 
 [node name="blockbench_export7" parent="." instance=ExtResource("7_jdjaa")]
-transform = Transform3D(-0.439158, 0, -1.11675, 0, 1.2, 0, 1.11675, 0, -0.439158, -0.205148, 2.91576, 0.957733)
+transform = Transform3D(-0.439158, 0, -1.11675, 0, 1.2, 0, 1.11675, 0, -0.439158, -1.80269, 2.91576, 2.58948)
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="blockbench_export7"]
 
@@ -107,6 +108,7 @@ transform = Transform3D(-0.439158, 0, -1.11675, 0, 1.2, 0, 1.11675, 0, -0.439158
 transform = Transform3D(-1.53971e-07, 9.99864e-08, -4.2, 2.28742, 3.52246, 0, 3.52246, -2.28742, -1.83588e-07, 2.49316, 3.84775, 1.36983)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("10_0gqws")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_b2fqi")
