@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://banowsxlou1aq"]
+
+[ext_resource type="Script" path="res://GameUI.gd" id="1_5ve1h"]
+[ext_resource type="PackedScene" uid="uid://cjg364otqq84f" path="res://objects/building_button.tscn" id="2_tk2dm"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ve1h")
+building_button_scene = ExtResource("2_tk2dm")
+
+[node name="BuildingPanel" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
