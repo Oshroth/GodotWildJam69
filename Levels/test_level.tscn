@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bprb7matuusms"]
+[gd_scene load_steps=30 format=3 uid="uid://bprb7matuusms"]
 
 [ext_resource type="PackedScene" uid="uid://b37stw47hpr2x" path="res://3DArt/Models/ArcherTower.gltf" id="1_exp8m"]
 [ext_resource type="PackedScene" uid="uid://dd4lqcr3dl65m" path="res://Player/player.tscn" id="3_fw4h6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Shaders/GrainHelper.gd" id="10_0gqws"]
 [ext_resource type="Shader" path="res://Shaders/FilmGrain.gdshader" id="10_uitym"]
 [ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="12_pbbw5"]
+[ext_resource type="Shader" path="res://Shaders/water.gdshader" id="13_ln2bt"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -71,12 +72,49 @@ albedo_color = Color(1, 0.0823529, 1, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_faypx"]
 material = SubResource("StandardMaterial3D_mljuf")
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_pxlxk"]
+size = Vector2(50, 50)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w4t1f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n6abk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8u7qk"]
+frequency = 0.085
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n66s5"]
+noise = SubResource("FastNoiseLite_8u7qk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6o141"]
+render_priority = 0
+shader = ExtResource("13_ln2bt")
+shader_parameter/albedo = Color(0.317647, 0.317647, 0.756863, 1)
+shader_parameter/albedo2 = Color(0, 0, 0.32549, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.02
+shader_parameter/wave_direction = Vector2(2, 0)
+shader_parameter/wave_direction2 = Vector2(0, 1)
+shader_parameter/time_scale = 0.025
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/color_deep = Color(0, 0.72549, 0, 1)
+shader_parameter/color_shallow = Color(1, 0, 0, 1)
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.01
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(0.403922, 0.556863, 1, 1)
+shader_parameter/wave = SubResource("NoiseTexture2D_n66s5")
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_w4t1f")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_n6abk")
+
 [node name="TestLevel" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.606882, 0, -1.3089)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.606882, -0.915602, -1.3089)
 visible = false
-size = Vector3(22.2451, 1, 18.5393)
+size = Vector3(26.6113, 1.63574, 18.5393)
 
 [node name="blockbench_export" parent="." instance=ExtResource("1_exp8m")]
 transform = Transform3D(2.3, 0, 0, 0, 2.3, 0, 0, 0, 2.3, -0.00318289, 0.524172, -5.34197)
@@ -95,7 +133,7 @@ transform = Transform3D(-0.195797, 0, 2.19127, 0, 2.2, 0, -2.19127, 0, -0.195797
 transform = Transform3D(0.92607, 0, 1.99559, 0, 2.2, 0, -1.99559, 0, 0.92607, 6.1263, 0.4875, 3.12277)
 
 [node name="Player" parent="." instance=ExtResource("3_fw4h6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31654, 0.6, 6.66592)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31654, 0.0249921, 6.66592)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.48961, -0.5, -0.424015, 0.755123, 5.38392, 5.50071, 5.77524)
@@ -104,7 +142,6 @@ size = 11.811
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -3)
-visible = false
 amount = 24
 lifetime = 4.0
 preprocess = 4.0
@@ -136,6 +173,7 @@ transform = Transform3D(-0.439158, 0, -1.11675, 0, 1.2, 0, 1.11675, 0, -0.439158
 transform = Transform3D(-1.53971e-07, 9.99864e-08, -4.2, 2.28742, 3.52246, 0, 3.52246, -2.28742, -1.83588e-07, 2.49316, 3.84775, -5.94057)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("10_0gqws")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
@@ -151,14 +189,21 @@ transform = Transform3D(-0.198502, 0, -3.3942, 0, 3.4, 0, 3.3942, 0, -0.198502, 
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.939474, 0)
+visible = false
 mesh = SubResource("PlaneMesh_30t0k")
 surface_material_override/0 = SubResource("StandardMaterial3D_qoura")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.3971, -23.3806, -11.3489)
+visible = false
 amount = 16
 lifetime = 12.0
 preprocess = 7.38
 visibility_aabb = AABB(-174.645, 18.2612, -6.79371, 349.291, 8, 12.4322)
 process_material = SubResource("ParticleProcessMaterial_e6e3k")
 draw_pass_1 = SubResource("SphereMesh_faypx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402255, -0.237701, 0.306969)
+mesh = SubResource("PlaneMesh_pxlxk")
+surface_material_override/0 = SubResource("ShaderMaterial_6o141")
