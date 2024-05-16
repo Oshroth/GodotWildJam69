@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0g34kspvjc2v"]
+
+[ext_resource type="Script" path="res://scripts/TowerScreenshot.gd" id="1_wwhxl"]
+[ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="2_dln2b"]
+[ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="3_wfuge"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kewoj"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_1pkdb"]
+sky_material = SubResource("ProceduralSkyMaterial_kewoj")
+
+[sub_resource type="Environment" id="Environment_7t4hu"]
+sky = SubResource("Sky_1pkdb")
+tonemap_mode = 2
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_wwhxl")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(-0.824126, -0.20021, 0.529841, 0, 0.935444, 0.353475, -0.566406, 0.291308, -0.770924, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_7t4hu")
+
+[node name="mage_tower" parent="SubViewport" instance=ExtResource("2_dln2b")]
+
+[node name="tree_sentry" parent="SubViewport" instance=ExtResource("3_wfuge")]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-1, -4.44089e-16, 8.74228e-08, 4.57078e-09, 0.998632, 0.0522837, -8.73032e-08, 0.0522837, -0.998632, 0, 1.10509, -2.1507)
+current = true
+size = 4.0
