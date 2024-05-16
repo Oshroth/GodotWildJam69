@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b37stw47hpr2x"
-path="res://.godot/imported/ArcherTower.gltf-d7ecfcde6788b2574d4936d07fdf2125.scn"
+uid="uid://70dua71j1km2"
+path="res://.godot/imported/tree_sentry.gltf-6673c143e245b0d94e2814cefc90060e.scn"
 
 [deps]
 
-source_file="res://3DArt/Models/ArcherTower.gltf"
-dest_files=["res://.godot/imported/ArcherTower.gltf-d7ecfcde6788b2574d4936d07fdf2125.scn"]
+source_file="res://3DArt/Models/tree_sentry.gltf"
+dest_files=["res://.godot/imported/tree_sentry.gltf-6673c143e245b0d94e2814cefc90060e.scn"]
 
 [params]
 

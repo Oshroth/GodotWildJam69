@@ -2,19 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2bmboty033r6"
-path="res://.godot/imported/TreeTower_0.png-b369765b1a2bac1e95a70b12fd9a8285.ctex"
+uid="uid://b161xc0l5ws7c"
+path="res://.godot/imported/tree_sentry_1.png-91631ff6e346f2d846519ac87eed8838.ctex"
 metadata={
 "vram_texture": false
 }
 generator_parameters={
-"md5": "5c07e80822432bbdefefb022dfad15af"
+"md5": "f061edf5f5598be20ed68b9fa7ffdc9c"
 }
 
 [deps]
 
-source_file="res://3DArt/Models/TreeTower_0.png"
-dest_files=["res://.godot/imported/TreeTower_0.png-b369765b1a2bac1e95a70b12fd9a8285.ctex"]
+source_file="res://3DArt/Models/tree_sentry_1.png"
+dest_files=["res://.godot/imported/tree_sentry_1.png-91631ff6e346f2d846519ac87eed8838.ctex"]
 
 [params]
 
