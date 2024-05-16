@@ -1,11 +1,11 @@
 [gd_scene load_steps=18 format=3 uid="uid://deeyclg26mks4"]
 
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="1_um7sx"]
-[ext_resource type="PackedScene" uid="uid://dsvnijb6r70pf" path="res://objects/PlaceholderTower.tscn" id="2_0a8rf"]
+[ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="3_1hqge"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="3_8hjef"]
 [ext_resource type="Shader" path="res://scenes/test/PlaneCollision.gdshader" id="3_kbmoa"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="4_hyebo"]
-[ext_resource type="PackedScene" uid="uid://b37stw47hpr2x" path="res://3DArt/Models/ArcherTower.gltf" id="4_sxdg4"]
+[ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="4_i1aeo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ciyvs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -51,8 +51,9 @@ albedo_color = Color(0, 0, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_um7sx")
-towerPlaceholders = Array[PackedScene]([ExtResource("2_0a8rf"), ExtResource("3_8hjef")])
-towerScenes = Array[PackedScene]([ExtResource("4_sxdg4"), ExtResource("3_8hjef")])
+tower_meshes = Array[PackedScene]([ExtResource("3_8hjef"), ExtResource("3_1hqge")])
+tower_scenes = Array[PackedScene]([ExtResource("3_8hjef"), ExtResource("3_1hqge")])
+placeholder_mat = ExtResource("4_i1aeo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_72pro")

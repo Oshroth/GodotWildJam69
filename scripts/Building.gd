@@ -4,6 +4,6 @@ class_name Building
 
 enum Type {
 	NONE,
-	ARCHER,
-	PLACEHOLDER
+	MAGE,
+	TREE_SENTRY
 }
