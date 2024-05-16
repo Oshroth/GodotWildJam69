@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b07irnqjbkxut"]
+
+[ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_clus1"]
+[ext_resource type="Script" path="res://Game/MageTower/mage_tower.gd" id="2_hmjve"]
+
+[node name="MageTower" instance=ExtResource("1_clus1")]
+script = ExtResource("2_hmjve")
+
+[node name="Node" parent="." index="0"]
+transform = Transform3D(5.4, 0, 0, 0, 5.4, 0, 0, 0, 5.4, 0, 0, 0)

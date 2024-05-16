@@ -9,7 +9,7 @@ var current_spawn_time:float = 2
 var is_spawning = true
 
 @onready var enemies:Array[PackedScene] = [
-	preload("res://Game/Enemies/voidling.tscn")
+	preload("res://Game/Enemies/Voidling/voidling.tscn")
 ]
 
 func start_spawning() -> void:

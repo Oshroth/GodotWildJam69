@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4tcw3e7jr6hl"]
+
+[ext_resource type="PackedScene" uid="uid://c1mvs4rowc7xb" path="res://3DArt/Models/feather_projectile.gltf" id="1_8f6po"]
+[ext_resource type="Script" path="res://Game/Projectile/projectile.gd" id="2_wyk5n"]
+
+[node name="Projectile" instance=ExtResource("1_8f6po")]
+script = ExtResource("2_wyk5n")

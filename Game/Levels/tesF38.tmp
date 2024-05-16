@@ -46,9 +46,8 @@ shader_parameter/target_color = Color(0.109804, 0.105882, 0.223529, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sdtiy"]
 size = Vector3(2, 7, 22)
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("tower")]
+[node name="World" type="Node3D"]
 script = ExtResource("1_bnu3k")
-tower = NodePath("MageTower")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6w507")

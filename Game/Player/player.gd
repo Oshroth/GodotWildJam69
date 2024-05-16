@@ -2,22 +2,34 @@ extends CharacterBody3D
 
 @onready var player_model = $player_model
 @onready var animation_player = $AnimationPlayer
+
 @export var camera:Camera3D
 @export var cursor:Node3D
 
 var current_gold:int = 200
 
-var current_tower:PackedScene = null
+var current_tower:Tower = null
 
 var available_tower:Array[PackedScene] = [
-	preload("res://TestTower.tscn"),
-	preload("res://TestTower.tscn")
+	preload("res://Game/Towers/BirdTower/BirdTower.tscn")
 ]
 
 var speed:int = 400
 
 func _process(delta: float) -> void:
 	_update_cursor()
+	if Input.is_key_pressed(KEY_0):
+		if cursor.get_child_count() == 0:
+			current_tower = available_tower[0].instantiate()
+			current_tower.placing = true
+			cursor.add_child(current_tower)
+	
+	if Input.is_action_just_pressed("down"):
+		if cursor.get_child_count() > 0:
+			cursor.remove_child(current_tower)
+			current_tower.global_position = cursor.global_position
+			get_parent().add_child(current_tower)
+			current_tower = null
 
 func _physics_process(delta):
 	var input_direction := Input.get_vector("left", "right", "up", "down")
@@ -38,7 +50,6 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _update_cursor():
-	# TODO: Probably move this from physics process
 	var mouse_pos = get_viewport().get_mouse_position()
 	var ray_length = 100
 	var from = camera.project_ray_origin(mouse_pos)

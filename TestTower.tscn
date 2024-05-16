@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d12fpt1u8l1jg"]
-
-[ext_resource type="PackedScene" uid="uid://rjr47kyess0n" path="res://3DArt/Models/TreeTower.gltf" id="1_sct64"]
-
-[node name="TestTower" instance=ExtResource("1_sct64")]
