@@ -6,3 +6,4 @@ class_name World
 func add_enemy(enemy:Enemy):
 	add_child(enemy)
 	enemy.enter_world(tower)
+

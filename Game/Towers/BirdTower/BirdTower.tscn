@@ -1,20 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://d12fpt1u8l1jg"]
+[gd_scene load_steps=6 format=3 uid="uid://d12fpt1u8l1jg"]
 
 [ext_resource type="PackedScene" uid="uid://rjr47kyess0n" path="res://3DArt/Models/TreeTower.gltf" id="1_3tgvp"]
 [ext_resource type="Script" path="res://Game/Towers/BirdTower/Tower.gd" id="2_4wm4u"]
+[ext_resource type="PackedScene" uid="uid://b4tcw3e7jr6hl" path="res://Game/Projectile/projectile.tscn" id="3_c3av4"]
+[ext_resource type="Texture2D" uid="uid://dnkkldu64wgdt" path="res://3DArt/Models/void_wizard_0.png" id="4_qydfp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0umwk"]
 radius = 3.0
 
 [node name="TestTower" instance=ExtResource("1_3tgvp")]
 script = ExtResource("2_4wm4u")
+projectile_scene = ExtResource("3_c3av4")
+icon = ExtResource("4_qydfp")
 
-[node name="Area3D" type="Area3D" parent="." index="1"]
-collision_layer = 65536
-collision_mask = 65536
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." index="0"]
+radius = 1.0
+
+[node name="Area3D" type="Area3D" parent="." index="2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("SphereShape3D_0umwk")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://f0e5w2t6s30d"]
+[gd_scene load_steps=4 format=3 uid="uid://f0e5w2t6s30d"]
 
 [ext_resource type="Script" path="res://Game/Enemies/Voidling/voidling.gd" id="1_r0nmy"]
 [ext_resource type="PackedScene" uid="uid://cbc01w13pauld" path="res://3DArt/Models/void_ling_1.gltf" id="2_lsbcn"]
 
-[node name="Voidling" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0f6o5"]
+size = Vector3(1.00195, 0.556641, 2.72278)
+
+[node name="Voidling" type="CharacterBody3D"]
 script = ExtResource("1_r0nmy")
+speed = 1.0
 
 [node name="Mesh" parent="." instance=ExtResource("2_lsbcn")]
 transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000976563, 0.22168, 0.181702)
+shape = SubResource("BoxShape3D_0f6o5")
