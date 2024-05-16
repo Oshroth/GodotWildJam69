@@ -10,6 +10,8 @@ var tower_ghost: Node3D
 var is_placing := false
 var selected_tower := Building.Type.NONE
 
+@export var tower_scale: float = 3.0
+
 func _ready():
 	#actual_pointer = towerPlaceholders[0].instantiate()
 	#actual_pointer.scale = Vector3(.1, .1, .1)
@@ -23,6 +25,7 @@ func _ready():
 			for mats in child.get_surface_override_material_count():
 				child.set_surface_override_material(mats, placeholder_mat)
 		add_child(tower)
+		tower.scale = Vector3.ONE * tower_scale
 		tower.hide()
 		tower_meshes_ghost.append(tower)
 
@@ -50,6 +53,7 @@ func spawn_tower(type: Building.Type, position: Vector3):
 			
 	add_child(tower)
 	tower.global_position = position
+	tower.scale = Vector3.ONE * tower_scale
 
 func ScreenPointToRay() -> Vector3:
 	var spaceState := get_world_3d().direct_space_state
