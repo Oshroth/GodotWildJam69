@@ -48,12 +48,18 @@ func spawn_tower(type: Building.Type, position: Vector3):
 	match type:
 		Building.Type.MAGE:
 			tower = tower_scenes[0].instantiate()
+			%BuildingSound.stream["stream_0/weight"] = 0
+			%BuildingSound.stream["stream_1/weight"] = 1
 		Building.Type.TREE_SENTRY:
 			tower = tower_scenes[1].instantiate()
-			
+			%BuildingSound.stream["stream_0/weight"] = 1
+			%BuildingSound.stream["stream_1/weight"] = 0
 	add_child(tower)
 	tower.global_position = position
 	tower.scale = Vector3.ONE * tower_scale
+	
+	%BuildingSound.play()
+
 
 func ScreenPointToRay() -> Vector3:
 	var spaceState := get_world_3d().direct_space_state
@@ -84,6 +90,7 @@ func _on_game_ui_build_tower(type: Building.Type):
 			selected_tower = type
 	tower_ghost.show()
 	is_placing = true
+	
 
 func _clean_up_ghost():
 	is_placing = false

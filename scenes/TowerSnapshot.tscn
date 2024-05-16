@@ -12,7 +12,11 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_kewoj")
 
 [sub_resource type="Environment" id="Environment_7t4hu"]
+background_mode = 1
+background_color = Color(0.525101, 0.525101, 0.525101, 1)
 sky = SubResource("Sky_1pkdb")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
 
 [node name="Node3D" type="Node3D"]
@@ -25,15 +29,23 @@ render_target_update_mode = 4
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
 transform = Transform3D(-0.824126, -0.20021, 0.529841, 0, 0.935444, 0.353475, -0.566406, 0.291308, -0.770924, 0, 0, 0)
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_7t4hu")
 
 [node name="mage_tower" parent="SubViewport" instance=ExtResource("2_dln2b")]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
 
 [node name="tree_sentry" parent="SubViewport" instance=ExtResource("3_wfuge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0957155, 0)
+
+[node name="floor" parent="SubViewport/tree_sentry/Node" index="0"]
+visible = false
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-1, -4.44089e-16, 8.74228e-08, 4.57078e-09, 0.998632, 0.0522837, -8.73032e-08, 0.0522837, -0.998632, 0, 1.10509, -2.1507)
+transform = Transform3D(-0.966133, -0.0134915, 0.257691, 4.57078e-09, 0.998632, 0.0522837, -0.258044, 0.050513, -0.964812, 0.39013, 0.765031, -1.25067)
 current = true
 size = 4.0
+
+[editable path="SubViewport/tree_sentry"]

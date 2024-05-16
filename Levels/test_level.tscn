@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="4_ahymr"]
 [ext_resource type="PackedScene" uid="uid://cbc01w13pauld" path="res://3DArt/Models/void_ling_1.gltf" id="5_suxiq"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="5_v5r3o"]
-[ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="12_pbbw5"]
+[ext_resource type="PackedScene" uid="uid://deeyclg26mks4" path="res://scenes/test/PlaneCollision.tscn" id="7_qb740"]
 [ext_resource type="Shader" path="res://Shaders/water.gdshader" id="13_ln2bt"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
@@ -135,9 +135,6 @@ draw_pass_1 = ExtResource("4_ahymr")
 [node name="blockbench_export2" parent="." instance=ExtResource("5_v5r3o")]
 transform = Transform3D(-5.46, 0, 4.77328e-07, 0, 5.46, 0, -4.77328e-07, 0, -5.46, -9.86716, 0, -3.87649)
 
-[node name="blockbench_export9" parent="." instance=ExtResource("12_pbbw5")]
-transform = Transform3D(-0.198502, 0, -3.3942, 0, 3.4, 0, 3.3942, 0, -0.198502, 1.63094, 0, -1.70896)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.939474, 0)
 visible = false
@@ -158,3 +155,14 @@ draw_pass_1 = SubResource("SphereMesh_faypx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402255, -0.237701, 0.306969)
 mesh = SubResource("PlaneMesh_pxlxk")
 surface_material_override/0 = SubResource("ShaderMaterial_6o141")
+
+[node name="Node3D" parent="." instance=ExtResource("7_qb740")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.595621, 0)
+
+[node name="DirectionalLight3D" parent="Node3D" index="1"]
+visible = false
+
+[node name="GridMap" parent="Node3D" index="6"]
+visible = false
+
+[editable path="Node3D"]
