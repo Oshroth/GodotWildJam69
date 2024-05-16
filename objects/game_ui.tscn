@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://banowsxlou1aq"]
+[gd_scene load_steps=8 format=3 uid="uid://banowsxlou1aq"]
 
 [ext_resource type="Script" path="res://GameUI.gd" id="1_5ve1h"]
 [ext_resource type="PackedScene" uid="uid://cjg364otqq84f" path="res://objects/building_button.tscn" id="2_tk2dm"]
+[ext_resource type="Script" path="res://scripts/Building.gd" id="3_vpgq4"]
+[ext_resource type="Texture2D" uid="uid://cfc1s5o6ljgd0" path="res://assets/images/mage_tower_icon.png" id="4_v0duk"]
+[ext_resource type="Texture2D" uid="uid://c02tsrxqkiipb" path="res://assets/images/tree_sentry_icon.png" id="5_gfhc1"]
+
+[sub_resource type="Resource" id="Resource_0djpy"]
+script = ExtResource("3_vpgq4")
+cost = 100
+building_name = &"Mage Tower"
+type = 1
+texture = ExtResource("4_v0duk")
+
+[sub_resource type="Resource" id="Resource_86ybd"]
+script = ExtResource("3_vpgq4")
+cost = 200
+building_name = &"Tree Sentry"
+type = 2
+texture = ExtResource("5_gfhc1")
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -12,6 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5ve1h")
 building_button_scene = ExtResource("2_tk2dm")
+buildings = Array[ExtResource("3_vpgq4")]([SubResource("Resource_0djpy"), SubResource("Resource_86ybd")])
 
 [node name="BuildingPanel" type="HBoxContainer" parent="."]
 layout_mode = 1
