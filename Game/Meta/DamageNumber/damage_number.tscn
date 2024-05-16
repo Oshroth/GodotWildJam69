@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3bq8cp30ef2l"]
+
+[ext_resource type="FontFile" uid="uid://cbayr8ymie7hc" path="res://Game/Meta/zekton rg.otf" id="1_0pttj"]
+[ext_resource type="Script" path="res://Game/Meta/DamageNumber/damage_number.gd" id="2_jbfag"]
+
+[node name="DamageNumber" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30297, 2.55107, 0)
+billboard = 1
+text = "2"
+font = ExtResource("1_0pttj")
+font_size = 97
+outline_size = 20
+script = ExtResource("2_jbfag")

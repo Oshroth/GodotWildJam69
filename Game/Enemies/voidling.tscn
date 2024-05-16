@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://f0e5w2t6s30d"]
+
+[ext_resource type="Script" path="res://Game/Enemies/voidling.gd" id="1_r0nmy"]
+[ext_resource type="PackedScene" uid="uid://cbc01w13pauld" path="res://3DArt/Models/void_ling_1.gltf" id="2_lsbcn"]
+
+[node name="Voidling" type="Node3D"]
+script = ExtResource("1_r0nmy")
+
+[node name="Mesh" parent="." instance=ExtResource("2_lsbcn")]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)
