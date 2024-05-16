@@ -1,8 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://bprb7matuusms"]
+[gd_scene load_steps=24 format=3 uid="uid://bprb7matuusms"]
 
 [ext_resource type="PackedScene" uid="uid://dd4lqcr3dl65m" path="res://Player/player.tscn" id="3_fw4h6"]
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="4_ahymr"]
-[ext_resource type="PackedScene" uid="uid://cbc01w13pauld" path="res://3DArt/Models/void_ling_1.gltf" id="5_suxiq"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="5_v5r3o"]
 [ext_resource type="Material" uid="uid://bshxucij6sym0" path="res://assets/place_holder_material_2.tres" id="7_q4i47"]
 [ext_resource type="PackedScene" uid="uid://deeyclg26mks4" path="res://scenes/test/PlaneCollision.tscn" id="7_qb740"]
@@ -90,7 +89,7 @@ curve = SubResource("Curve_rmvjn")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w5asb"]
 emission_shape = 3
-emission_box_extents = Vector3(10, 1, 10)
+emission_box_extents = Vector3(25, 1, 20)
 initial_velocity_min = -2.0
 initial_velocity_max = 2.0
 gravity = Vector3(0, 1, 0)
@@ -110,21 +109,12 @@ size = Vector3(26.6113, 1.63574, 18.5393)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6w507")
 
-[node name="blockbench_export3" parent="." instance=ExtResource("5_suxiq")]
-transform = Transform3D(-0.195797, 0, 2.19127, 0, 2.2, 0, -2.19127, 0, -0.195797, 4.84052, 0.4875, -0.595414)
-
-[node name="blockbench_export4" parent="." instance=ExtResource("5_suxiq")]
-transform = Transform3D(-0.195797, 0, 2.19127, 0, 2.2, 0, -2.19127, 0, -0.195797, 5.93292, 0.4875, 0.958563)
-
-[node name="blockbench_export5" parent="." instance=ExtResource("5_suxiq")]
-transform = Transform3D(0.92607, 0, 1.99559, 0, 2.2, 0, -1.99559, 0, 0.92607, 6.1263, 0.4875, 3.12277)
-
 [node name="Player" parent="." instance=ExtResource("3_fw4h6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31654, 0.0249921, 6.66592)
 visible = false
 
 [node name="blockbench_export2" parent="." instance=ExtResource("5_v5r3o")]
-transform = Transform3D(-5.46, 0, 4.77328e-07, 0, 5.46, 0, -4.77328e-07, 0, -5.46, -9.86716, 0, -3.87649)
+transform = Transform3D(0.948119, 0, -5.37705, 0, 5.46, 0, 5.37705, 0, 0.948119, -11.7548, 0, 4.70232)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.939474, 0)
@@ -170,11 +160,11 @@ script = ExtResource("8_x28wm")
 transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.48961, -0.5, -0.424015, 0.755123, 15.4276, 14.2036, 25.825)
 projection = 1
 current = true
-size = 15.0
+size = 30.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31654, -0.575008, 3.66592)
-amount = 24
+amount = 64
 lifetime = 4.0
 preprocess = 4.0
 visibility_aabb = AABB(-8.95724, -4, -4, 17.9145, 8, 8)
