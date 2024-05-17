@@ -6,7 +6,7 @@ var temp_target:Node3D = null
 
 @export var max_health:float = 10
 @export var health:float = 10
-@export var speed:float = 10.0
+@export var speed:float = 1.0
 @export var attack_timer:float = 1.0
 @export var attack_power:float = 2
 @export var gold_worth:float = 10
@@ -44,7 +44,7 @@ func attack() -> void:
 	if temp_target != null:
 		temp_target.damage(attack_power, self)
 	else:
-		print("attack the thing?")
+		target.damage(attack_power)
 	is_attacking = false
 
 func damage(amount:float) -> void:
@@ -54,6 +54,8 @@ func damage(amount:float) -> void:
 
 func die() -> void:
 	on_death.emit()
+	# TODO: Gold in world label should show the increase...
+	MageTower.instance.gold += gold_worth
 	queue_free()
 
 func enter_world(new_target:Node3D) -> void:

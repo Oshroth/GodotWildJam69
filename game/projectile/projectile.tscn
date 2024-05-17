@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7kwu4qtb1klf"]
+
+[ext_resource type="Script" path="res://game/projectile/projectile.gd" id="1_fcuil"]
+[ext_resource type="PackedScene" uid="uid://biipksmhbv0ce" path="res://3DArt/Models/seed_bullet.gltf" id="2_b1q6w"]
+
+[node name="Projectile" type="Node3D"]
+script = ExtResource("1_fcuil")
+
+[node name="blockbench_export" parent="." instance=ExtResource("2_b1q6w")]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=24 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
+[ext_resource type="Script" path="res://game/tower/mage_tower.gd" id="3_pl4ac"]
 [ext_resource type="Script" path="res://game/spawner/EnemySpawner.gd" id="5_13m4a"]
 [ext_resource type="Script" path="res://Player/CameraController.gd" id="5_fc5ra"]
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
@@ -71,7 +72,29 @@ script = ExtResource("1_4skrw")
 environment = SubResource("Environment_6w507")
 
 [node name="MageTower" parent="." instance=ExtResource("1_ecthc")]
+unique_name_in_owner = true
 transform = Transform3D(0.948119, 0, -5.37705, 0, 5.46, 0, 5.37705, 0, 0.948119, -11.7548, 0, 4.70232)
+script = ExtResource("3_pl4ac")
+max_health = null
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MageTower"]
+
+[node name="ProgressBar" type="ProgressBar" parent="MageTower/CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -194.0
+offset_top = 17.0
+offset_right = 194.0
+offset_bottom = 44.0
+grow_horizontal = 2
+max_value = 1000.0
+value = 1000.0
+
+[node name="Label" type="Label" parent="MageTower/CanvasLayer"]
+offset_right = 290.0
+offset_bottom = 87.0
+text = "Gold: "
 
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("5_fc5ra")
