@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=21 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
 [ext_resource type="Script" path="res://game/tower/mage_tower.gd" id="3_pl4ac"]
+[ext_resource type="Texture2D" uid="uid://cccf4ohsqe8tw" path="res://2DArt/Coin.png" id="4_4hal0"]
 [ext_resource type="Script" path="res://game/spawner/EnemySpawner.gd" id="5_13m4a"]
 [ext_resource type="Script" path="res://Player/CameraController.gd" id="5_fc5ra"]
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
@@ -64,7 +65,6 @@ environment = SubResource("Environment_6w507")
 unique_name_in_owner = true
 transform = Transform3D(0.948119, 0, -5.37705, 0, 5.46, 0, 5.37705, 0, 0.948119, -11.7548, 0, 4.70232)
 script = ExtResource("3_pl4ac")
-max_health = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MageTower"]
 
@@ -81,9 +81,18 @@ max_value = 1000.0
 value = 1000.0
 
 [node name="Label" type="Label" parent="MageTower/CanvasLayer"]
+offset_left = 32.0
 offset_right = 290.0
 offset_bottom = 87.0
 text = "Gold: "
+
+[node name="TextureRect" type="TextureRect" parent="MageTower/CanvasLayer"]
+custom_minimum_size = Vector2(30, 30)
+offset_right = 30.0
+offset_bottom = 30.0
+texture = ExtResource("4_4hal0")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("5_fc5ra")
@@ -137,4 +146,6 @@ shape = SubResource("WorldBoundaryShape3D_jx5kv")
 
 [node name="GameUI" parent="." instance=ExtResource("10_edop1")]
 
+[connection signal="gold_changed" from="MageTower" to="TowerPlacer" method="_on_mage_tower_gold_changed"]
+[connection signal="gold_changed" from="MageTower" to="GameUI" method="_on_gold_changed"]
 [connection signal="buildTower" from="GameUI" to="TowerPlacer" method="_on_game_ui_build_tower"]

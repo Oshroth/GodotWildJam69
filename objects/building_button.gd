@@ -9,9 +9,9 @@ class_name BuildingButton
 			cost_label.text = str(building_cost)
 @export var building_name: StringName
 
-@onready var name_label: Label = $Name
-@onready var cost_label: Label = $Cost
+@onready var name_label: Label = $MarginContainer/Name
+@onready var cost_label: Label = $MarginContainer/HBoxContainer/Cost
 
-func _ready():
+func _ready() -> void:
 	name_label.text = building_name
 	cost_label.text = str(building_cost)

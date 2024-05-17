@@ -10,16 +10,16 @@ var tower_ghost: Node3D
 #var actual_pointer: Node3D
 
 var is_placing := false
-var selected_tower := Building.Type.NONE
+var selected_tower : Building
 
 @export var tower_scale: float = 3.0
 
-func _ready():
+func _ready() -> void:
 	game_ui.buildings = towers
 	for tower_obj in towers:
 		var tower: Node3D = tower_obj.mesh.instantiate()
 		if tower is MeshInstance3D:
-			for mats in tower.get_surface_override_material_count():
+			for mats: int in tower.get_surface_override_material_count():
 				tower.set_surface_override_material(mats, placeholder_mat)
 		for child in tower.find_children("*", "MeshInstance3D") as Array[MeshInstance3D]:
 			for mats in child.get_surface_override_material_count():
@@ -29,31 +29,25 @@ func _ready():
 		tower.hide()
 		tower_meshes_ghost.append(tower)
 
-func _physics_process(_delta):
-	var point = ScreenPointToRay()
-	#actual_pointer.global_position = point
+func _physics_process(_delta: float) -> void:
+	var point := ScreenPointToRay()
 	point.x = int(point.x)
 	point.z = int(point.z)
 	if is_placing:
 		tower_ghost.global_position = point
 		if Input.is_action_just_pressed(&"place_building"):
-			_clean_up_ghost()
 			spawn_tower(selected_tower, point)
-			selected_tower = Building.Type.NONE
+			_clean_up_ghost()
 		elif Input.is_action_just_pressed(&"cancel_building"):
 			_clean_up_ghost()
 			
-func spawn_tower(type: Building.Type, position: Vector3):
-	
-	var tower_filter := towers.filter(func(tower: Building): return tower.type == type)
-	if tower_filter.is_empty():
-		return
-	
-	var tower = tower_filter[0].spawn_scene.instantiate()
-	%BuildingSound.stream = tower_filter[0].placement_sound
-	add_child(tower)
-	tower.global_position = position
-	tower.scale = Vector3.ONE * tower_scale
+func spawn_tower(building: Building, pos: Vector3) -> void:
+	MageTower.instance.gold -= building.cost
+	var tower_node: Node3D = building.spawn_scene.instantiate()
+	%BuildingSound.stream = building.placement_sound
+	add_child(tower_node)
+	tower_node.global_position = pos
+	tower_node.scale = Vector3.ONE * tower_scale
 	
 	%BuildingSound.play()
 
@@ -74,20 +68,28 @@ func ScreenPointToRay() -> Vector3:
 	return Vector3()
 
 
-func _on_game_ui_build_tower(type: Building.Type):
+func _on_game_ui_build_tower(type: Building.Type) -> void:
+	var tower_filter := towers.filter(func(tower: Building) -> bool: return tower.type == type)
+	if tower_filter.is_empty() || tower_filter[0].cost > MageTower.instance.gold:
+		return
+	
 	if is_placing:
 		_clean_up_ghost()
 		
-	var tower := towers.filter(func(tower: Building): return tower.type == type)
-	if tower.is_empty():
-		return
-	tower_ghost = tower_meshes_ghost[towers.find(tower[0])]
+	tower_ghost = tower_meshes_ghost[towers.find(tower_filter[0])]
 	tower_ghost.show()
-	selected_tower = type
+	selected_tower = tower_filter[0]
 	is_placing = true
 	
 
-func _clean_up_ghost():
+func _clean_up_ghost() -> void:
 	is_placing = false
-	tower_ghost.hide()
+	if tower_ghost != null:
+		tower_ghost.hide()
 	tower_ghost = null
+	selected_tower = null
+
+
+func _on_mage_tower_gold_changed(gold: int) -> void:
+	if selected_tower != null and selected_tower.cost > gold:
+		_clean_up_ghost()

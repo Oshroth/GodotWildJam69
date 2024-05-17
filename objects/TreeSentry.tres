@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("1_4u1db")
-cost = 200
+cost = 20
 building_name = &"Tree Sentry"
 type = 1
 texture = ExtResource("2_a8gow")

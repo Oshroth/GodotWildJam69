@@ -1,13 +1,18 @@
 extends Node3D
 class_name MageTower
+
+signal gold_changed(gold: int)
 #Hacky way.
-static var instance = null
+static var instance: MageTower = null
 
 @export var max_health:float = 1000
 var current_health:float
 
 # TODO: Use this to build towers.
-var gold:int = 200
+var gold:int = 200:
+	set(value):
+		gold = value
+		gold_changed.emit(value)
 
 func _ready() -> void:
 	
@@ -15,8 +20,8 @@ func _ready() -> void:
 	$CanvasLayer/ProgressBar.value = max_health
 	$CanvasLayer/ProgressBar.max_value = max_health
 
-func _process(delta: float) -> void:
-	$CanvasLayer/Label.text = "Coins: " + str(gold)
+func _process(_delta: float) -> void:
+	$CanvasLayer/Label.text = str(gold)
 
 func damage(amount:float) -> void:
 	current_health -= amount

@@ -9,15 +9,15 @@ var temp_target:Node3D = null
 @export var speed:float = 1.0
 @export var attack_timer:float = 1.0
 @export var attack_power:float = 2
-@export var gold_worth:float = 10
+@export var gold_worth:int = 10
 @export var attack_distance:float = 5.0
 
-@onready var navigation_agent = $NavigationAgent3D
+@onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 
 signal on_death
-var is_attacking = false
+var is_attacking := false
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if navigation_agent.is_navigation_finished() && is_attacking:
 		return
 	

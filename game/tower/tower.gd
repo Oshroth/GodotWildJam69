@@ -32,9 +32,9 @@ func shoot_projectile() -> void:
 		await %AnimationPlayer.animation_finished
 		look_at(target.position)
 		var new_projectile:Projectile = projectile.instantiate()
+		get_parent().add_child(new_projectile)
 		new_projectile.global_position = projectile_position.global_position
 		new_projectile.target = target
-		get_parent().add_child(new_projectile)
 
 func _on_target_finder_body_entered(body: Node3D) -> void:
 	if body is Enemy and target == null:

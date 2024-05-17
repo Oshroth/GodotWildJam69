@@ -8,7 +8,7 @@ var target:Enemy = null
 
 func _process(delta: float) -> void:
 	if target != null:
-		var direction = target.position - position
+		var direction := target.position - position
 		look_at(target.position)
 		if direction.length() < 2:
 			queue_free()
