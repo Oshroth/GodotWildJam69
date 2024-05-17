@@ -9,8 +9,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_eaws7"]
 size = Vector3(1, 1.7486, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_vm076"]
-radius = 3.7512
+[sub_resource type="SphereShape3D" id="SphereShape3D_whlon"]
+radius = 3.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fwfs5"]
 _data = {
@@ -18,14 +18,18 @@ _data = {
 "idle": ExtResource("5_5cm8j")
 }
 
-[node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position")]
+[node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player")]
 script = ExtResource("1_fati0")
 health = 20.0
 max_health = 20.0
 projectile = ExtResource("2_xhsty")
+projectile_model = "seed"
 damage_amount = 5.0
 attack_timer = 1.5
 projectile_position = NodePath("ProjectilePosition")
+animation_player = NodePath("AnimationPlayer")
+animation_idle = "tree/idle"
+animation_attack = "tree/attack"
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8
@@ -40,19 +44,19 @@ shape = SubResource("BoxShape3D_eaws7")
 [node name="TargetFinder" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TargetFinder"]
-shape = SubResource("SphereShape3D_vm076")
+shape = SubResource("SphereShape3D_whlon")
 
 [node name="ProjectilePosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.221039, -0.239911)
 
 [node name="Projectile" parent="." instance=ExtResource("2_xhsty")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0145155, 0.203883, -0.278735)
+model = "seed"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../blockbench_export")
 libraries = {
 "tree": SubResource("AnimationLibrary_fwfs5")
 }
-autoplay = "tree/idle"
 
 [connection signal="body_entered" from="TargetFinder" to="." method="_on_target_finder_body_entered"]

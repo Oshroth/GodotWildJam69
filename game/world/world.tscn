@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=25 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
@@ -6,11 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://mv50jo6e81ip" path="res://2DArt/gem_void.png" id="4_g2fun"]
 [ext_resource type="Script" path="res://game/spawner/EnemySpawner.gd" id="5_13m4a"]
 [ext_resource type="Script" path="res://Player/CameraController.gd" id="5_fc5ra"]
+[ext_resource type="AudioStream" uid="uid://bwr10ebx1ylip" path="res://Audio/Enemy_loot_1.wav" id="5_kjmhb"]
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
+[ext_resource type="AudioStream" uid="uid://d0842dfh8m1jr" path="res://Audio/Enemy_loot_2.wav" id="6_rslqj"]
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="6_voolx"]
 [ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
 [ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="10_0kmq2"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="10_edop1"]
+[ext_resource type="Resource" uid="uid://cqurmunffgqe2" path="res://objects/RockSentry.tres" id="12_ohaua"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -19,6 +22,14 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 fog_light_color = Color(0.109804, 0.105882, 0.223529, 1)
 fog_density = 0.05
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4aeh8"]
+random_pitch = 1.2
+streams_count = 2
+stream_0/stream = ExtResource("5_kjmhb")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_rslqj")
+stream_1/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_rmvjn"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498084, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0286168), 0.0, 0.0, 0, 0]
@@ -92,6 +103,11 @@ offset_bottom = 30.0
 texture = ExtResource("4_g2fun")
 stretch_mode = 4
 
+[node name="death_sound" type="AudioStreamPlayer" parent="MageTower"]
+stream = SubResource("AudioStreamRandomizer_4aeh8")
+max_polyphony = 5
+bus = &"SFX"
+
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("5_fc5ra")
 
@@ -112,6 +128,7 @@ draw_pass_1 = ExtResource("6_g6y1v")
 
 [node name="EnemySpawner" type="Node3D" parent="." node_paths=PackedStringArray("main_target")]
 script = ExtResource("5_13m4a")
+spawn_radius = 75.0
 main_target = NodePath("../MageTower")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
@@ -124,7 +141,7 @@ mesh = SubResource("PlaneMesh_fwq5o")
 [node name="TowerPlacer" type="Node3D" parent="." node_paths=PackedStringArray("game_ui")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
 script = ExtResource("6_voolx")
-towers = Array[Resource("res://scripts/Building.gd")]([ExtResource("10_0kmq2")])
+towers = Array[Resource("res://scripts/Building.gd")]([ExtResource("10_0kmq2"), ExtResource("12_ohaua")])
 placeholder_mat = ExtResource("9_wr7oq")
 game_ui = NodePath("../GameUI")
 

@@ -12,5 +12,6 @@ class_name Building
 
 enum Type {
 	NONE,
-	TREE_SENTRY
+	TREE_SENTRY,
+	ROCK_SENTRY
 }

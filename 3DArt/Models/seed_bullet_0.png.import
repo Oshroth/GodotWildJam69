@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://qrypn5ejee3p"
-path.s3tc="res://.godot/imported/seed_bullet_0.png-16beed34aa96baa43adab53188d69b66.s3tc.ctex"
+path="res://.godot/imported/seed_bullet_0.png-16beed34aa96baa43adab53188d69b66.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "bd1cdd775158c8542be3c2a5800fc097"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://3DArt/Models/seed_bullet_0.png"
-dest_files=["res://.godot/imported/seed_bullet_0.png-16beed34aa96baa43adab53188d69b66.s3tc.ctex"]
+dest_files=["res://.godot/imported/seed_bullet_0.png-16beed34aa96baa43adab53188d69b66.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

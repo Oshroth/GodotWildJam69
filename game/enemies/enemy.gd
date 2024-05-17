@@ -13,6 +13,8 @@ var temp_target:Node3D = null
 @export var attack_distance:float = 5.0
 
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
+@onready var death_sound = $death_sound
+
 
 signal on_death
 var is_attacking := false
@@ -56,6 +58,7 @@ func die() -> void:
 	on_death.emit()
 	# TODO: Gold in world label should show the increase...
 	MageTower.instance.gold += gold_worth
+	MageTower.instance.play_enemy_death()
 	queue_free()
 
 func enter_world(new_target:Node3D) -> void:

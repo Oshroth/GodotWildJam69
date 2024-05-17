@@ -5,15 +5,21 @@ class_name TowerB
 @export var max_health:float = 10
 
 @export var projectile:PackedScene
+@export var projectile_model:String
 @export var damage_amount:float
 @export var attack_timer:float
 @export var projectile_position:Node3D
+@export var animation_player:AnimationPlayer
+@export var animation_idle:String
+@export var animation_attack:String
 @onready var current_timer:float = attack_timer
 
 var target:Enemy = null
-@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 signal on_death
+
+func _ready():
+	animation_player.play(animation_idle)
 
 func damage(amount:float, other:Node3D) -> void:
 	health -= amount
@@ -29,15 +35,18 @@ func _process(delta: float) -> void:
 
 func shoot_projectile() -> void:
 	if target != null:
-		animation_player.play("tree/attack")
+		animation_player.play(animation_attack)
 		await animation_player.animation_finished
 		if target == null:
 			return
 		look_at(target.position)
 		var new_projectile:Projectile = projectile.instantiate()
+		new_projectile.model = projectile_model
+		new_projectile.damage = damage_amount
 		get_parent().add_child(new_projectile)
 		new_projectile.global_position = projectile_position.global_position
 		new_projectile.target = target
+		animation_player.play(animation_idle)
 
 func _on_target_finder_body_entered(body: Node3D) -> void:
 	if body is Enemy and target == null:

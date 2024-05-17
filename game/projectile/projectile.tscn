@@ -1,9 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7kwu4qtb1klf"]
+[gd_scene load_steps=5 format=3 uid="uid://c7kwu4qtb1klf"]
 
 [ext_resource type="Script" path="res://game/projectile/projectile.gd" id="1_fcuil"]
 [ext_resource type="PackedScene" uid="uid://biipksmhbv0ce" path="res://3DArt/Models/seed_bullet.gltf" id="2_b1q6w"]
+[ext_resource type="PackedScene" uid="uid://byh3pqcned2h2" path="res://3DArt/Models/rock_bullet.gltf" id="3_ljl0r"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hvrhd"]
+radius = 0.946162
 
 [node name="Projectile" type="Node3D"]
 script = ExtResource("1_fcuil")
 
-[node name="blockbench_export" parent="." instance=ExtResource("2_b1q6w")]
+[node name="seed" parent="." instance=ExtResource("2_b1q6w")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+visible = false
+
+[node name="Hurtbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("SphereShape3D_hvrhd")
+
+[node name="rock" parent="." instance=ExtResource("3_ljl0r")]
+transform = Transform3D(1.14278, 0, 0, 0, 1.14278, 0, 0, 0, 1.14278, 0, 0, 0)
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

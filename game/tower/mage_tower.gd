@@ -8,6 +8,8 @@ static var instance: MageTower = null
 @export var max_health:float = 1000
 var current_health:float
 
+@onready var death_sound = $death_sound
+
 # TODO: Use this to build towers.
 var gold:int = 200:
 	set(value):
@@ -30,3 +32,6 @@ func damage(amount:float) -> void:
 	if current_health <= 0:
 		print("End game")
 		get_tree().reload_current_scene()
+
+func play_enemy_death():
+	death_sound.play()

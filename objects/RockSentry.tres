@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Building" load_steps=6 format=3 uid="uid://cqurmunffgqe2"]
+
+[ext_resource type="PackedScene" uid="uid://b6d8lj1x8brtj" path="res://3DArt/Models/rock_sentry.gltf" id="1_82goh"]
+[ext_resource type="AudioStream" uid="uid://b2heii13avvcn" path="res://Audio/Tower_Build_2.wav" id="2_yro06"]
+[ext_resource type="Script" path="res://scripts/Building.gd" id="3_u6saq"]
+[ext_resource type="PackedScene" uid="uid://bqx4w5ipy3nds" path="res://game/tower/rock_tower.tscn" id="4_e18px"]
+[ext_resource type="Texture2D" uid="uid://sghj2cb31b33" path="res://3DArt/Models/rock_sentry_1.png" id="5_npufu"]
+
+[resource]
+script = ExtResource("3_u6saq")
+cost = 30
+building_name = &"TheRock"
+type = 2
+texture = ExtResource("5_npufu")
+mesh = ExtResource("1_82goh")
+spawn_scene = ExtResource("4_e18px")
+placement_sound = ExtResource("2_yro06")
