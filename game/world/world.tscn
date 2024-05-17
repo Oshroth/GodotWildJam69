@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=20 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
@@ -7,12 +7,9 @@
 [ext_resource type="Script" path="res://Player/CameraController.gd" id="5_fc5ra"]
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="6_voolx"]
-[ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="7_4khtj"]
-[ext_resource type="PackedScene" uid="uid://d2orcmq61wu1k" path="res://game/tower/tower.tscn" id="8_kuixe"]
-[ext_resource type="Material" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
+[ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
+[ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="10_0kmq2"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="10_edop1"]
-[ext_resource type="AudioStream" uid="uid://c2j44bfnwn4kl" path="res://Audio/Tower_Build_1.wav" id="10_kkuen"]
-[ext_resource type="AudioStream" uid="uid://b2heii13avvcn" path="res://Audio/Tower_Build_2.wav" id="11_eerah"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -47,14 +44,6 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fwq5o"]
 size = Vector2(200, 200)
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h3wyy"]
-random_pitch = 1.3
-streams_count = 2
-stream_0/stream = ExtResource("10_kkuen")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("11_eerah")
-stream_1/weight = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ps8qe"]
 albedo_color = Color(0.407843, 0.164706, 0, 1)
@@ -125,15 +114,14 @@ navigation_mesh = SubResource("NavigationMesh_e0jfx")
 visible = false
 mesh = SubResource("PlaneMesh_fwq5o")
 
-[node name="TowerPlacer" type="Node3D" parent="."]
+[node name="TowerPlacer" type="Node3D" parent="." node_paths=PackedStringArray("game_ui")]
 script = ExtResource("6_voolx")
-tower_meshes = Array[PackedScene]([ExtResource("7_4khtj")])
-tower_scenes = Array[PackedScene]([ExtResource("8_kuixe")])
+towers = Array[Resource("res://scripts/Building.gd")]([ExtResource("10_0kmq2")])
 placeholder_mat = ExtResource("9_wr7oq")
+game_ui = NodePath("../GameUI")
 
 [node name="BuildingSound" type="AudioStreamPlayer" parent="TowerPlacer"]
 unique_name_in_owner = true
-stream = SubResource("AudioStreamRandomizer_h3wyy")
 volume_db = -10.0
 bus = &"SFX"
 

@@ -1,8 +1,10 @@
 extends Node3D
 
-@export var tower_meshes : Array[PackedScene]
-@export var tower_scenes : Array[PackedScene]
+@export var towers: Array[Building]
 @export var placeholder_mat : Material
+
+@export var game_ui: GameUI
+
 var tower_meshes_ghost: Array[Node3D]
 var tower_ghost: Node3D
 #var actual_pointer: Node3D
@@ -13,11 +15,9 @@ var selected_tower := Building.Type.NONE
 @export var tower_scale: float = 3.0
 
 func _ready():
-	#actual_pointer = towerPlaceholders[0].instantiate()
-	#actual_pointer.scale = Vector3(.1, .1, .1)
-	#add_child(actual_pointer)
-	for mesh in tower_meshes:
-		var tower: Node3D = mesh.instantiate()
+	game_ui.buildings = towers
+	for tower_obj in towers:
+		var tower: Node3D = tower_obj.mesh.instantiate()
 		if tower is MeshInstance3D:
 			for mats in tower.get_surface_override_material_count():
 				tower.set_surface_override_material(mats, placeholder_mat)
@@ -44,16 +44,13 @@ func _physics_process(_delta):
 			_clean_up_ghost()
 			
 func spawn_tower(type: Building.Type, position: Vector3):
-	var tower: Node3D
-	match type:
-		Building.Type.MAGE:
-			tower = tower_scenes[0].instantiate()
-			%BuildingSound.stream["stream_0/weight"] = 0
-			%BuildingSound.stream["stream_1/weight"] = 1
-		Building.Type.TREE_SENTRY:
-			tower = tower_scenes[1].instantiate()
-			%BuildingSound.stream["stream_0/weight"] = 1
-			%BuildingSound.stream["stream_1/weight"] = 0
+	
+	var tower_filter := towers.filter(func(tower: Building): return tower.type == type)
+	if tower_filter.is_empty():
+		return
+	
+	var tower = tower_filter[0].spawn_scene.instantiate()
+	%BuildingSound.stream = tower_filter[0].placement_sound
 	add_child(tower)
 	tower.global_position = position
 	tower.scale = Vector3.ONE * tower_scale
@@ -81,14 +78,12 @@ func _on_game_ui_build_tower(type: Building.Type):
 	if is_placing:
 		_clean_up_ghost()
 		
-	match type:
-		Building.Type.MAGE:
-			tower_ghost = tower_meshes_ghost[0]
-			selected_tower = type
-		Building.Type.TREE_SENTRY:
-			tower_ghost = tower_meshes_ghost[1]
-			selected_tower = type
+	var tower := towers.filter(func(tower: Building): return tower.type == type)
+	if tower.is_empty():
+		return
+	tower_ghost = tower_meshes_ghost[towers.find(tower[0])]
 	tower_ghost.show()
+	selected_tower = type
 	is_placing = true
 	
 

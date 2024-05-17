@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Building" load_steps=3 format=3 uid="uid://d360u8rsy6f8m"]
+
+[ext_resource type="Script" path="res://scripts/Building.gd" id="1_ddsk0"]
+[ext_resource type="Texture2D" uid="uid://cfc1s5o6ljgd0" path="res://assets/images/mage_tower_icon.png" id="2_0o8fv"]
+
+[resource]
+script = ExtResource("1_ddsk0")
+cost = 100
+building_name = &"Mage Tower"
+type = 1
+texture = ExtResource("2_0o8fv")

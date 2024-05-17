@@ -1,8 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://deeyclg26mks4"]
+[gd_scene load_steps=20 format=3 uid="uid://deeyclg26mks4"]
 
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="1_um7sx"]
-[ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="3_1hqge"]
-[ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="3_8hjef"]
 [ext_resource type="Shader" path="res://scenes/test/PlaneCollision.gdshader" id="3_kbmoa"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="4_hyebo"]
 [ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="4_i1aeo"]
@@ -62,8 +60,6 @@ stream_1/weight = 1.0
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_um7sx")
-tower_meshes = Array[PackedScene]([ExtResource("3_8hjef"), ExtResource("3_1hqge")])
-tower_scenes = Array[PackedScene]([ExtResource("3_8hjef"), ExtResource("3_1hqge")])
 placeholder_mat = ExtResource("4_i1aeo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

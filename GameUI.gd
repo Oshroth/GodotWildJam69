@@ -5,7 +5,7 @@ class_name GameUI
 signal buildTower(type: Building.Type)
 
 @export var building_button_scene : PackedScene
-@export var buildings: Array[Building]
+var buildings: Array[Building]
 
 @onready var building_panel: BoxContainer = $BuildingPanel
 
@@ -23,7 +23,7 @@ func building_button_tapped(type: Building.Type):
 	buildTower.emit(type)
 
 func _process(delta):
-	if Input.is_action_just_pressed("select_tower_1"):
-		building_button_tapped(Building.Type.MAGE)
-	if Input.is_action_just_pressed("select_tower_2"):
-		building_button_tapped(Building.Type.TREE_SENTRY)
+	if Input.is_action_just_pressed("select_tower_1") and !buildings.is_empty():
+		building_button_tapped(buildings[0].type)
+	if Input.is_action_just_pressed("select_tower_2") and buildings.size() >= 2:
+		building_button_tapped(buildings[1].type)
