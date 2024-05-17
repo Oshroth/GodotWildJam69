@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cngukj75jov3y"]
+
+[ext_resource type="PackedScene" uid="uid://3qr6jkmp2m4x" path="res://game/enemies/enemy.tscn" id="1_2bnrm"]
+[ext_resource type="PackedScene" uid="uid://cbc01w13pauld" path="res://3DArt/Models/void_ling_1.gltf" id="2_xt6kj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kubpc"]
+size = Vector3(0.377991, 0.237427, 1.24109)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7x8ot"]
+radius = 8.0
+
+[node name="Enemy" instance=ExtResource("1_2bnrm")]
+collision_mask = 2
+
+[node name="Visual" parent="." index="1" instance=ExtResource("2_xt6kj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0162048, 0.0896606, 0.120544)
+shape = SubResource("BoxShape3D_kubpc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AwarenessArea" index="0"]
+shape = SubResource("SphereShape3D_7x8ot")

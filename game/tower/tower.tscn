@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2orcmq61wu1k"]
+
+[ext_resource type="Script" path="res://game/tower/tower.gd" id="1_fati0"]
+[ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="2_f87v3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eaws7"]
+size = Vector3(1, 1.7486, 1)
+
+[node name="Tower" type="Node3D"]
+script = ExtResource("1_fati0")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.756683, 0)
+shape = SubResource("BoxShape3D_eaws7")
+
+[node name="blockbench_export" parent="." instance=ExtResource("2_f87v3")]
