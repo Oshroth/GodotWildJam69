@@ -115,6 +115,7 @@ visible = false
 mesh = SubResource("PlaneMesh_fwq5o")
 
 [node name="TowerPlacer" type="Node3D" parent="." node_paths=PackedStringArray("game_ui")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
 script = ExtResource("6_voolx")
 towers = Array[Resource("res://scripts/Building.gd")]([ExtResource("10_0kmq2")])
 placeholder_mat = ExtResource("9_wr7oq")

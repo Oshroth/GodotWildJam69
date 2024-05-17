@@ -1,14 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2orcmq61wu1k"]
+[gd_scene load_steps=9 format=3 uid="uid://d2orcmq61wu1k"]
 
 [ext_resource type="Script" path="res://game/tower/tower.gd" id="1_fati0"]
 [ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="2_f87v3"]
 [ext_resource type="PackedScene" uid="uid://c7kwu4qtb1klf" path="res://game/projectile/projectile.tscn" id="2_xhsty"]
+[ext_resource type="Animation" uid="uid://bul8x8yh5txlc" path="res://3DArt/Animations/Tree/attack.res" id="4_whw48"]
+[ext_resource type="Animation" uid="uid://c4dvs4a7srp10" path="res://3DArt/Animations/Tree/idle.res" id="5_5cm8j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eaws7"]
 size = Vector3(1, 1.7486, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vm076"]
 radius = 3.7512
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fwfs5"]
+_data = {
+"attack": ExtResource("4_whw48"),
+"idle": ExtResource("5_5cm8j")
+}
 
 [node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position")]
 script = ExtResource("1_fati0")
@@ -39,5 +47,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.221039, -0.239911)
 
 [node name="Projectile" parent="." instance=ExtResource("2_xhsty")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0145155, 0.203883, -0.278735)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../blockbench_export")
+libraries = {
+"tree": SubResource("AnimationLibrary_fwfs5")
+}
+autoplay = "tree/idle"
 
 [connection signal="body_entered" from="TargetFinder" to="." method="_on_target_finder_body_entered"]

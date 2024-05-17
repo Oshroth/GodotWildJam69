@@ -28,6 +28,8 @@ func _process(delta: float) -> void:
 
 func shoot_projectile() -> void:
 	if target != null:
+		%AnimationPlayer.play("tree/attack")
+		await %AnimationPlayer.animation_finished
 		look_at(target.position)
 		var new_projectile:Projectile = projectile.instantiate()
 		new_projectile.global_position = projectile_position.global_position

@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://banowsxlou1aq"]
+[gd_scene load_steps=3 format=3 uid="uid://banowsxlou1aq"]
 
 [ext_resource type="Script" path="res://GameUI.gd" id="1_5ve1h"]
 [ext_resource type="PackedScene" uid="uid://cjg364otqq84f" path="res://objects/building_button.tscn" id="2_tk2dm"]
-[ext_resource type="Resource" uid="uid://d360u8rsy6f8m" path="res://objects/MageTower.tres" id="3_plk63"]
-[ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="4_k0gkl"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -14,7 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5ve1h")
 building_button_scene = ExtResource("2_tk2dm")
-buildings = Array[Resource("res://scripts/Building.gd")]([ExtResource("3_plk63"), ExtResource("4_k0gkl")])
 
 [node name="BuildingPanel" type="HBoxContainer" parent="."]
 layout_mode = 1
