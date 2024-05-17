@@ -44,12 +44,12 @@ func _physics_process(_delta: float) -> void:
 func spawn_tower(building: Building, pos: Vector3) -> void:
 	MageTower.instance.gold -= building.cost
 	var tower_node: Node3D = building.spawn_scene.instantiate()
-	%BuildingSound.stream = building.placement_sound
+	$BuildingSound.stream = building.placement_sound
 	add_child(tower_node)
 	tower_node.global_position = pos
 	tower_node.scale = Vector3.ONE * tower_scale
 	
-	%BuildingSound.play()
+	$BuildingSound.play()
 
 
 func ScreenPointToRay() -> Vector3:

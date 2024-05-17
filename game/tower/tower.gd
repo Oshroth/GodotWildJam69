@@ -11,6 +11,7 @@ class_name TowerB
 @onready var current_timer:float = attack_timer
 
 var target:Enemy = null
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 signal on_death
 
@@ -28,8 +29,10 @@ func _process(delta: float) -> void:
 
 func shoot_projectile() -> void:
 	if target != null:
-		%AnimationPlayer.play("tree/attack")
-		await %AnimationPlayer.animation_finished
+		animation_player.play("tree/attack")
+		await animation_player.animation_finished
+		if target == null:
+			return
 		look_at(target.position)
 		var new_projectile:Projectile = projectile.instantiate()
 		get_parent().add_child(new_projectile)
