@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
 [ext_resource type="Script" path="res://game/tower/mage_tower.gd" id="3_pl4ac"]
-[ext_resource type="Texture2D" uid="uid://cccf4ohsqe8tw" path="res://2DArt/Coin.png" id="4_4hal0"]
+[ext_resource type="Texture2D" uid="uid://mv50jo6e81ip" path="res://2DArt/gem_void.png" id="4_g2fun"]
 [ext_resource type="Script" path="res://game/spawner/EnemySpawner.gd" id="5_13m4a"]
 [ext_resource type="Script" path="res://Player/CameraController.gd" id="5_fc5ra"]
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
@@ -87,11 +87,9 @@ offset_bottom = 87.0
 text = "Gold: "
 
 [node name="TextureRect" type="TextureRect" parent="MageTower/CanvasLayer"]
-custom_minimum_size = Vector2(30, 30)
 offset_right = 30.0
 offset_bottom = 30.0
-texture = ExtResource("4_4hal0")
-expand_mode = 1
+texture = ExtResource("4_g2fun")
 stretch_mode = 4
 
 [node name="CameraController" type="Node3D" parent="."]

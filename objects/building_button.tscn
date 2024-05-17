@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://objects/building_button.gd" id="1_mph2t"]
 [ext_resource type="Texture2D" uid="uid://b3g6o0dlxnf2q" path="res://2DArt/tower_button_ui_pressed.png" id="1_tlikv"]
 [ext_resource type="Texture2D" uid="uid://buti75d0rn2pf" path="res://2DArt/tower_button_ui_focus.png" id="2_xl17h"]
-[ext_resource type="Texture2D" uid="uid://cccf4ohsqe8tw" path="res://2DArt/Coin.png" id="4_fvojo"]
+[ext_resource type="Texture2D" uid="uid://mv50jo6e81ip" path="res://2DArt/gem_void.png" id="4_jg6tr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hcyl2"]
 load_path = "res://.godot/imported/tower_button_ui.png-71421b9673c54935e5db024da0ec6ae6.ctex"
@@ -82,6 +82,6 @@ custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("4_fvojo")
+texture = ExtResource("4_jg6tr")
 expand_mode = 4
 stretch_mode = 4
