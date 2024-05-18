@@ -77,5 +77,6 @@ func _on_awareness_area_area_entered(area: Area3D) -> void:
 		navigation_agent.set_target_position(temp_target.global_position + get_random_unit_vector())
 
 func _reacquire_target() -> void:
+	
 	temp_target = null
 	navigation_agent.set_target_position(target.global_position + get_random_unit_vector())

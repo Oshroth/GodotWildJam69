@@ -11,6 +11,7 @@ class_name TowerB
 @export var projectile_position:Node3D
 @export var animation_player:AnimationPlayer
 @export var animation_idle:String
+@export var target_finder:Area3D
 @export var animation_attack:String
 @onready var current_timer:float = attack_timer
 
@@ -27,11 +28,15 @@ func damage(amount:float, other:Node3D) -> void:
 		on_death.emit()
 		queue_free()
 
+func scale_visual(amount:Vector3) -> void:
+	$Visual.scale = amount
+
 func _process(delta: float) -> void:
 	current_timer -= delta
 	if current_timer <= 0:
-		current_timer = attack_timer
+		acquire_target()
 		shoot_projectile()
+		current_timer = attack_timer
 
 func shoot_projectile() -> void:
 	if target != null:
@@ -52,6 +57,19 @@ func _on_target_finder_body_entered(body: Node3D) -> void:
 	if body is Enemy and target == null:
 		target = body
 		target.on_death.connect(reset_target)
+
+func acquire_target() -> void:
+	if target == null:
+		var bodies = target_finder.get_overlapping_bodies()
+		for body in bodies:
+			if body is Enemy:
+				var test_enemy:Enemy = body
+				var distance = test_enemy.global_position.distance_to(global_position)
+				print(distance)
+				target = body
+				target.speed = 0
+				target.on_death.connect(reset_target)
+				break
 
 func reset_target() -> void:
 	target = null

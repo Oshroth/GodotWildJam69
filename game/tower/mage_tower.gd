@@ -17,7 +17,7 @@ var gold:int = 200:
 		gold_changed.emit(value)
 
 func _ready() -> void:
-	
+	current_health = max_health
 	instance = self
 	$CanvasLayer/ProgressBar.value = max_health
 	$CanvasLayer/ProgressBar.max_value = max_health

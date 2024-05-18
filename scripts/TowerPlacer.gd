@@ -47,7 +47,7 @@ func spawn_tower(building: Building, pos: Vector3) -> void:
 	$BuildingSound.stream = building.placement_sound
 	add_child(tower_node)
 	tower_node.global_position = pos
-	tower_node.scale = Vector3.ONE * tower_scale
+	tower_node.scale_visual(Vector3.ONE * tower_scale)
 	
 	$BuildingSound.play()
 

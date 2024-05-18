@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="1_um7sx"]
 [ext_resource type="Shader" path="res://scenes/test/PlaneCollision.gdshader" id="3_kbmoa"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="4_hyebo"]
-[ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="4_i1aeo"]
+[ext_resource type="Material" path="res://assets/PlaceholderMat.tres" id="4_i1aeo"]
 [ext_resource type="MeshLibrary" uid="uid://bve5tisdpktvg" path="res://objects/Tiles.tres" id="7_qgdy5"]
 [ext_resource type="AudioStream" uid="uid://c2j44bfnwn4kl" path="res://Audio/Tower_Build_1.wav" id="8_02cp4"]
 [ext_resource type="AudioStream" uid="uid://b2heii13avvcn" path="res://Audio/Tower_Build_2.wav" id="9_php0f"]

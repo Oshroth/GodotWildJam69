@@ -10,7 +10,7 @@
 size = Vector3(1, 1.7486, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_whlon"]
-radius = 3.0
+radius = 2.64082
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n1bko"]
 _data = {
@@ -48,11 +48,6 @@ shape = SubResource("SphereShape3D_whlon")
 
 [node name="ProjectilePosition" type="Node3D" parent="Tower"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.503898, -0.646438)
-
-[node name="Projectile" parent="Tower" instance=ExtResource("2_0lvhn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0145155, 0.460871, -0.639695)
-visible = false
-model = "rock"
 
 [node name="blockbench_export" parent="." instance=ExtResource("3_712i7")]
 

@@ -10,7 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
 [ext_resource type="AudioStream" uid="uid://d0842dfh8m1jr" path="res://Audio/Enemy_loot_2.wav" id="6_rslqj"]
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="6_voolx"]
-[ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
+[ext_resource type="Material" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
 [ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="10_0kmq2"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="10_edop1"]
 [ext_resource type="Resource" uid="uid://cqurmunffgqe2" path="res://objects/RockSentry.tres" id="12_ohaua"]
@@ -112,8 +112,7 @@ bus = &"SFX"
 script = ExtResource("5_fc5ra")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.48961, -0.5, -0.424015, 0.755123, 15.4276, 14.2036, 25.825)
-projection = 1
+transform = Transform3D(0.792289, -0.298594, 0.532089, 0, 0.872069, 0.489382, -0.610145, -0.387733, 0.690931, 2.028, 12.674, 17.805)
 current = true
 size = 30.0
 
@@ -127,6 +126,7 @@ process_material = SubResource("ParticleProcessMaterial_w5asb")
 draw_pass_1 = ExtResource("6_g6y1v")
 
 [node name="EnemySpawner" type="Node3D" parent="." node_paths=PackedStringArray("main_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7591, 0, 0)
 script = ExtResource("5_13m4a")
 spawn_radius = 75.0
 main_target = NodePath("../MageTower")
