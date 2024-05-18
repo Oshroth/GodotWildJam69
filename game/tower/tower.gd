@@ -14,6 +14,7 @@ class_name TowerB
 @export var target_finder:Area3D
 @export var animation_attack:String
 @onready var current_timer:float = attack_timer
+@export var distance:float = 12
 
 var target:Enemy = null
 
@@ -21,6 +22,7 @@ signal on_death
 
 func _ready():
 	animation_player.play(animation_idle)
+	health = max_health
 
 func damage(amount:float, other:Node3D) -> void:
 	health -= amount
@@ -45,6 +47,8 @@ func shoot_projectile() -> void:
 		if target == null:
 			return
 		look_at(target.position)
+		rotation.x = 0
+		rotation.z = 0
 		var new_projectile:Projectile = projectile.instantiate()
 		new_projectile.model = projectile_model
 		new_projectile.damage = damage_amount
@@ -55,21 +59,21 @@ func shoot_projectile() -> void:
 
 func _on_target_finder_body_entered(body: Node3D) -> void:
 	if body is Enemy and target == null:
-		target = body
-		target.on_death.connect(reset_target)
-
+		if body.global_position.distance_to(global_position) <= distance:
+			target = body
+			target.on_death.connect(reset_target)
+		
 func acquire_target() -> void:
 	if target == null:
 		var bodies = target_finder.get_overlapping_bodies()
 		for body in bodies:
 			if body is Enemy:
-				var test_enemy:Enemy = body
-				var distance = test_enemy.global_position.distance_to(global_position)
-				print(distance)
-				target = body
-				target.speed = 0
-				target.on_death.connect(reset_target)
-				break
+				if body.global_position.distance_to(global_position) <= distance:
+					var test_enemy:Enemy = body
+					var distance = test_enemy.global_position.distance_to(global_position)
+					target = body
+					target.on_death.connect(reset_target)
+					break
 
 func reset_target() -> void:
 	target = null

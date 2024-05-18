@@ -11,7 +11,7 @@ var temp_target:Node3D = null
 @export var attack_power:float = 2
 @export var gold_worth:int = 10
 @export var attack_distance:float = 5.0
-
+@export var awareness:Area3D
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 @onready var death_sound = $death_sound
 
@@ -77,6 +77,14 @@ func _on_awareness_area_area_entered(area: Area3D) -> void:
 		navigation_agent.set_target_position(temp_target.global_position + get_random_unit_vector())
 
 func _reacquire_target() -> void:
-	
 	temp_target = null
 	navigation_agent.set_target_position(target.global_position + get_random_unit_vector())
+
+func acquire_target() -> void:
+	if target == null:
+		var bodies = awareness.get_overlapping_areas()
+		for body in bodies:
+			if body.get_parent() is TowerB:
+				var test_enemy:TowerB = body.get_parent()
+				temp_target = body
+				break

@@ -6,21 +6,19 @@
 [ext_resource type="Animation" uid="uid://dqpqp7k8aust0" path="res://3DArt/Animations/rock/rock_idle.res" id="4_pewkl"]
 [ext_resource type="Animation" uid="uid://d1kmoypi1xkfq" path="res://3DArt/Animations/rock/rock_attack.res" id="5_c82n6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eaws7"]
-size = Vector3(1, 1.7486, 1)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_whlon"]
-radius = 2.64082
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n1bko"]
 _data = {
 "rock_attack": ExtResource("5_c82n6"),
 "rock_idle": ExtResource("4_pewkl")
 }
 
-[node name="RockTower" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_eaws7"]
+size = Vector3(1, 1.7486, 1)
 
-[node name="Tower" type="Node3D" parent="." node_paths=PackedStringArray("projectile_position", "animation_player")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_whlon"]
+radius = 5.4
+
+[node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player", "target_finder")]
 script = ExtResource("1_an7g4")
 health = 0.0
 max_health = 20.0
@@ -29,32 +27,33 @@ projectile_model = "rock"
 damage_amount = 5.0
 attack_timer = 1.5
 projectile_position = NodePath("ProjectilePosition")
-animation_player = NodePath("../AnimationPlayer")
+animation_player = NodePath("AnimationPlayer")
 animation_idle = "rock/rock_idle"
+target_finder = NodePath("TargetFinder")
 animation_attack = "rock/rock_attack"
 
-[node name="Area3D" type="Area3D" parent="Tower"]
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tower/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.756683, 0)
-shape = SubResource("BoxShape3D_eaws7")
-
-[node name="TargetFinder" type="Area3D" parent="Tower"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tower/TargetFinder"]
-shape = SubResource("SphereShape3D_whlon")
-
-[node name="ProjectilePosition" type="Node3D" parent="Tower"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.503898, -0.646438)
-
-[node name="blockbench_export" parent="." instance=ExtResource("3_712i7")]
+[node name="Visual" parent="." instance=ExtResource("3_712i7")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../blockbench_export")
+root_node = NodePath("../Visual")
 libraries = {
 "rock": SubResource("AnimationLibrary_n1bko")
 }
 
-[connection signal="body_entered" from="Tower/TargetFinder" to="Tower" method="_on_target_finder_body_entered"]
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.756683, 0)
+shape = SubResource("BoxShape3D_eaws7")
+
+[node name="TargetFinder" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetFinder"]
+shape = SubResource("SphereShape3D_whlon")
+
+[node name="ProjectilePosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.503898, -0.646438)
+
+[connection signal="body_entered" from="TargetFinder" to="." method="_on_target_finder_body_entered"]
