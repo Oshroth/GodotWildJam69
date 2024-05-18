@@ -1,8 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0g34kspvjc2v"]
+[gd_scene load_steps=10 format=3 uid="uid://d0g34kspvjc2v"]
 
 [ext_resource type="Script" path="res://scripts/TowerScreenshot.gd" id="1_wwhxl"]
-[ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="2_dln2b"]
+[ext_resource type="PackedScene" uid="uid://b6d8lj1x8brtj" path="res://3DArt/Models/rock_sentry.gltf" id="3_bfrtw"]
+[ext_resource type="Script" path="res://scripts/SnapshotModel.gd" id="3_kbqe1"]
 [ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="3_wfuge"]
+
+[sub_resource type="Resource" id="Resource_ea8f2"]
+script = ExtResource("3_kbqe1")
+filename = "tree_sentry_icon.png"
+mesh = ExtResource("3_wfuge")
+offset = Vector3(0, -0.096, 0)
+
+[sub_resource type="Resource" id="Resource_yl5ub"]
+script = ExtResource("3_kbqe1")
+filename = "rock_sentry_icon.png"
+mesh = ExtResource("3_bfrtw")
+offset = Vector3(0, 0, 0)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kewoj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,6 +34,7 @@ tonemap_mode = 2
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_wwhxl")
+models = Array[ExtResource("3_kbqe1")]([SubResource("Resource_ea8f2"), SubResource("Resource_yl5ub")])
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -34,18 +48,7 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_7t4hu")
 
-[node name="mage_tower" parent="SubViewport" instance=ExtResource("2_dln2b")]
-transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
-
-[node name="tree_sentry" parent="SubViewport" instance=ExtResource("3_wfuge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0957155, 0)
-
-[node name="floor" parent="SubViewport/tree_sentry/Node" index="0"]
-visible = false
-
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(-0.966133, -0.0134915, 0.257691, 4.57078e-09, 0.998632, 0.0522837, -0.258044, 0.050513, -0.964812, 0.39013, 0.765031, -1.25067)
 current = true
 size = 4.0
-
-[editable path="SubViewport/tree_sentry"]

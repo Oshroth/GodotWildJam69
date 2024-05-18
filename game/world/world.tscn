@@ -10,7 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
 [ext_resource type="AudioStream" uid="uid://d0842dfh8m1jr" path="res://Audio/Enemy_loot_2.wav" id="6_rslqj"]
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="6_voolx"]
-[ext_resource type="Material" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
+[ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
 [ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="10_0kmq2"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="10_edop1"]
 [ext_resource type="Resource" uid="uid://cqurmunffgqe2" path="res://objects/RockSentry.tres" id="12_ohaua"]
@@ -30,6 +30,10 @@ stream_0/stream = ExtResource("5_kjmhb")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("6_rslqj")
 stream_1/weight = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7x2pv"]
+radius = 0.756469
+height = 2.4777
 
 [sub_resource type="Curve" id="Curve_rmvjn"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498084, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0286168), 0.0, 0.0, 0, 0]
@@ -57,14 +61,10 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 [sub_resource type="PlaneMesh" id="PlaneMesh_fwq5o"]
 size = Vector2(200, 200)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ps8qe"]
-albedo_color = Color(0.407843, 0.164706, 0, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_e050c"]
-material = SubResource("StandardMaterial3D_ps8qe")
-size = Vector2(200, 200)
-
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_jx5kv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0oave"]
+size = Vector3(3, 2, 3)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_4skrw")
@@ -108,6 +108,15 @@ stream = SubResource("AudioStreamRandomizer_4aeh8")
 max_polyphony = 5
 bus = &"SFX"
 
+[node name="StaticBody3D" type="StaticBody3D" parent="MageTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.857899, 0)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MageTower/StaticBody3D"]
+transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_7x2pv")
+
 [node name="CameraController" type="Node3D" parent="."]
 script = ExtResource("5_fc5ra")
 
@@ -139,11 +148,19 @@ navigation_mesh = SubResource("NavigationMesh_e0jfx")
 visible = false
 mesh = SubResource("PlaneMesh_fwq5o")
 
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_jx5kv")
+
 [node name="TowerPlacer" type="Node3D" parent="." node_paths=PackedStringArray("game_ui")]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
 script = ExtResource("6_voolx")
 towers = Array[Resource("res://scripts/Building.gd")]([ExtResource("10_0kmq2"), ExtResource("12_ohaua")])
 placeholder_mat = ExtResource("9_wr7oq")
+can_place_tower_colour = Color(0.145098, 0.807843, 1, 0.721569)
+cant_place_tower_colour = Color(1, 0, 0, 0.721569)
 game_ui = NodePath("../GameUI")
 
 [node name="BuildingSound" type="AudioStreamPlayer" parent="TowerPlacer"]
@@ -151,14 +168,14 @@ unique_name_in_owner = true
 volume_db = -10.0
 bus = &"SFX"
 
-[node name="Floor" type="MeshInstance3D" parent="TowerPlacer"]
-visible = false
-mesh = SubResource("PlaneMesh_e050c")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="TowerPlacer/Floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TowerPlacer/Floor/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_jx5kv")
+[node name="ShapeCast3D" type="ShapeCast3D" parent="TowerPlacer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 37.1325)
+enabled = false
+shape = SubResource("BoxShape3D_0oave")
+target_position = Vector3(0, 0, 0)
+max_results = 1
+collision_mask = 25
+collide_with_areas = true
 
 [node name="GameUI" parent="." instance=ExtResource("10_edop1")]
 

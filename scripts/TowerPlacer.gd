@@ -1,7 +1,10 @@
 extends Node3D
 
 @export var towers: Array[Building]
-@export var placeholder_mat : Material
+@export var placeholder_mat : StandardMaterial3D
+@export var can_place_tower_colour: Color
+@export var cant_place_tower_colour: Color
+
 
 @export var game_ui: GameUI
 
@@ -12,9 +15,15 @@ var tower_ghost: Node3D
 var is_placing := false
 var selected_tower : Building
 
+@onready var ghost_collider: ShapeCast3D = $ShapeCast3D
+
 @export var tower_scale: float = 3.0
 
 func _ready() -> void:
+	setup_towers()
+	ghost_collider.add_exception($"../Floor")
+	
+func setup_towers() -> void:
 	game_ui.buildings = towers
 	for tower_obj in towers:
 		var tower: Node3D = tower_obj.mesh.instantiate()
@@ -34,13 +43,25 @@ func _physics_process(_delta: float) -> void:
 	point.x = int(point.x)
 	point.z = int(point.z)
 	if is_placing:
+		tower_ghost.show()
 		tower_ghost.global_position = point
-		if Input.is_action_just_pressed(&"place_building"):
+		var can_place := can_place_tower(point)
+		update_tower_ghost_visual(can_place)
+		if Input.is_action_just_pressed("place_building") and can_place:
 			spawn_tower(selected_tower, point)
 			_clean_up_ghost()
-		elif Input.is_action_just_pressed(&"cancel_building"):
+		elif Input.is_action_just_pressed("cancel_building"):
 			_clean_up_ghost()
+
+func can_place_tower(point: Vector3) -> bool:
+	ghost_collider.global_position = point
+	ghost_collider.force_shapecast_update()
+	print(ghost_collider.collision_result)
+	return !ghost_collider.is_colliding()
 			
+func update_tower_ghost_visual(can_place: bool) -> void:
+	placeholder_mat.albedo_color = can_place_tower_colour if can_place else cant_place_tower_colour
+	
 func spawn_tower(building: Building, pos: Vector3) -> void:
 	MageTower.instance.gold -= building.cost
 	var tower_node: Node3D = building.spawn_scene.instantiate()
@@ -77,7 +98,8 @@ func _on_game_ui_build_tower(type: Building.Type) -> void:
 		_clean_up_ghost()
 		
 	tower_ghost = tower_meshes_ghost[towers.find(tower_filter[0])]
-	tower_ghost.show()
+	#tower_ghost.show()
+	
 	selected_tower = tower_filter[0]
 	is_placing = true
 	
