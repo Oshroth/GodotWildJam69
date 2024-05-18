@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=28 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
 [ext_resource type="Script" path="res://game/tower/mage_tower.gd" id="3_pl4ac"]
 [ext_resource type="Texture2D" uid="uid://mv50jo6e81ip" path="res://2DArt/gem_void.png" id="4_g2fun"]
+[ext_resource type="Texture2D" uid="uid://xbrgm617gane" path="res://2DArt/money_display.svg" id="4_iin7r"]
 [ext_resource type="Script" path="res://game/spawner/EnemySpawner.gd" id="5_13m4a"]
 [ext_resource type="Script" path="res://Player/CameraController.gd" id="5_fc5ra"]
 [ext_resource type="AudioStream" uid="uid://bwr10ebx1ylip" path="res://Audio/Enemy_loot_1.wav" id="5_kjmhb"]
@@ -86,22 +87,52 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -194.0
-offset_top = 17.0
+offset_top = 55.0
 offset_right = 194.0
-offset_bottom = 44.0
+offset_bottom = 82.0
 grow_horizontal = 2
 max_value = 1000.0
 value = 1000.0
 
-[node name="Label" type="Label" parent="MageTower/CanvasLayer"]
-offset_left = 32.0
-offset_right = 290.0
-offset_bottom = 87.0
-text = "Gold: "
+[node name="TextureRect2" type="TextureRect" parent="MageTower/CanvasLayer"]
+offset_left = 49.0
+offset_top = 44.0
+offset_right = 195.0
+offset_bottom = 86.0
+scale = Vector2(1.12486, 1.12486)
+texture = ExtResource("4_iin7r")
 
-[node name="TextureRect" type="TextureRect" parent="MageTower/CanvasLayer"]
-offset_right = 30.0
-offset_bottom = 30.0
+[node name="Label" type="Label" parent="MageTower/CanvasLayer/TextureRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.106
+offset_top = -11.221
+offset_right = 8.89397
+offset_bottom = 11.779
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.247059, 0, 0.505882, 1)
+theme_override_font_sizes/font_size = 18
+text = "Gold:"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MageTower/CanvasLayer/TextureRect2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -16.0
+offset_right = -10.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("4_g2fun")
 stretch_mode = 4
 

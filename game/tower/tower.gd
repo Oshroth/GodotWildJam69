@@ -86,7 +86,6 @@ func reset_target() -> void:
 	target = null
 
 func hit_effect():
-	print("hell yeah")
 	for x in hit_effect_targets:
 		x.get_active_material(0).albedo_color = Color.RED
 		#x.set_surface_override_material(0,damage_material)

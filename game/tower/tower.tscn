@@ -526,8 +526,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_26tfe")
 
-[sub_resource type="Animation" id="Animation_3qi2i"]
-resource_name = "rock_idle"
+[sub_resource type="Animation" id="Animation_ycudn"]
+resource_name = "rock_attack"
 length = 0.001
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
@@ -572,8 +572,8 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = PackedFloat32Array(0, 1, 1, 1, 1)
 
-[sub_resource type="Animation" id="Animation_ycudn"]
-resource_name = "rock_attack"
+[sub_resource type="Animation" id="Animation_3qi2i"]
+resource_name = "rock_idle"
 length = 0.001
 tracks/0/type = "rotation_3d"
 tracks/0/imported = true
@@ -637,7 +637,7 @@ attack_timer = 1.5
 projectile_position = NodePath("ProjectilePosition")
 animation_player = NodePath("AnimationPlayer")
 animation_idle = "tree/idle"
-tower_mesh = NodePath("Visual")
+tower_mesh = NodePath("Visual/Node/tower3")
 hit_effect_targets = [NodePath("Visual/Node/tower3/trunk/leafs/sphere"), NodePath("Visual/Node/tower3/trunk/face/nose/cuboid")]
 target_finder = NodePath("TargetFinder")
 animation_attack = "tree/attack"
@@ -720,7 +720,6 @@ skeleton = NodePath("")
 [node name="tower3" type="Node3D" parent="Visual/Node"]
 
 [node name="trunk" type="Node3D" parent="Visual/Node/tower3"]
-transform = Transform3D(0.998564, 0.0535734, 0, -0.0535734, 0.998564, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="leafs" type="Node3D" parent="Visual/Node/tower3/trunk"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79068e-18, 1.125, -1.96975e-17)
@@ -731,7 +730,7 @@ mesh = SubResource("ArrayMesh_x4v5o")
 skeleton = NodePath("")
 
 [node name="face" type="Node3D" parent="Visual/Node/tower3/trunk"]
-transform = Transform3D(0.836286, 0, -0.548293, 0, 1, 0, 0.548293, 0, 0.836286, 0, 0, -0.015625)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.015625)
 
 [node name="nose" type="Node3D" parent="Visual/Node/tower3/trunk/face"]
 

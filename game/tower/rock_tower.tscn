@@ -48,18 +48,19 @@ stream_0/weight = 1.0
 stream_1/stream = ExtResource("7_l0po0")
 stream_1/weight = 1.0
 
-[node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player", "tower_mesh", "target_finder")]
+[node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player", "tower_mesh", "hit_effect_targets", "target_finder")]
 script = ExtResource("1_an7g4")
 health = 0.0
 max_health = 20.0
 projectile = ExtResource("2_0lvhn")
 projectile_model = "rock"
-damage_amount = 5.0
-attack_timer = 1.5
+damage_amount = 10.0
+attack_timer = 2.5
 projectile_position = NodePath("ProjectilePosition")
 animation_player = NodePath("AnimationPlayer")
 animation_idle = "rock/rock_idle"
 tower_mesh = NodePath("Visual/Node/tower4")
+hit_effect_targets = [NodePath("Visual/Node/tower4/body/sphere")]
 target_finder = NodePath("TargetFinder")
 animation_attack = "rock/rock_attack"
 
@@ -72,7 +73,7 @@ transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 8.95341e-19, 0.1875, -1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.625)
 
 [node name="1" parent="Visual/Node/tower4/rocks" index="0"]
-transform = Transform3D(0.482963, -0.866025, -0.12941, 0.836516, 0.5, -0.224144, 0.258819, -1.2666e-07, 0.965926, 0.3125, 0.015625, 0)
+transform = Transform3D(0.482963, -0.866025, -0.12941, 0.836516, 0.5, -0.224144, 0.258819, -1.41561e-07, 0.965926, 0.3125, 0.015625, 0)
 
 [node name="2" parent="Visual/Node/tower4/rocks" index="1"]
 transform = Transform3D(0.224144, 0.687541, 0.690686, -0.836516, 0.499344, -0.225601, -0.5, -0.527203, 0.687064, -0.3125, 0.015625, 0)

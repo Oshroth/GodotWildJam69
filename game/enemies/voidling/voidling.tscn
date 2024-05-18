@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cngukj75jov3y"]
+[gd_scene load_steps=12 format=3 uid="uid://cngukj75jov3y"]
 
 [ext_resource type="PackedScene" uid="uid://3qr6jkmp2m4x" path="res://game/enemies/enemy.tscn" id="1_2bnrm"]
 [ext_resource type="PackedScene" uid="uid://cbc01w13pauld" path="res://3DArt/Models/void_ling_1.gltf" id="2_xt6kj"]
 [ext_resource type="Animation" uid="uid://dfxir7ycfogq1" path="res://3DArt/Animations/Voidling/walk.res" id="3_fsdee"]
+[ext_resource type="Animation" uid="uid://t5h7v3ispec7" path="res://3DArt/Animations/Voidling/attack.res" id="4_57ad4"]
 [ext_resource type="AudioStream" uid="uid://bwr10ebx1ylip" path="res://Audio/Enemy_loot_1.wav" id="4_slx6g"]
+[ext_resource type="Animation" uid="uid://cj2qhqfrjsjpg" path="res://3DArt/Animations/Voidling/attack2.res" id="5_th5t7"]
 [ext_resource type="AudioStream" uid="uid://d0842dfh8m1jr" path="res://Audio/Enemy_loot_2.wav" id="5_xjqqp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kubpc"]
@@ -14,6 +16,8 @@ radius = 6.49577
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p0lli"]
 _data = {
+"attack": ExtResource("4_57ad4"),
+"attack2": ExtResource("5_th5t7"),
 "walk": ExtResource("3_fsdee")
 }
 
@@ -28,6 +32,7 @@ stream_1/weight = 1.0
 [node name="Enemy" instance=ExtResource("1_2bnrm")]
 collision_layer = 17
 collision_mask = 2
+attack_timer = 0.25
 attack_distance = 2.5
 
 [node name="Visual" parent="." index="1" instance=ExtResource("2_xt6kj")]

@@ -14,10 +14,12 @@ var temp_target:Node3D = null
 @export var awareness:Area3D
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 @onready var death_sound = $death_sound
+@onready var animation_player = $AnimationPlayer
 
 
 signal on_death
 var is_attacking := false
+var anims:Array[String] = ["voidling/attack","voidling/attack2"]
 
 func _physics_process(_delta: float) -> void:
 	if navigation_agent.is_navigation_finished() && is_attacking:
@@ -44,9 +46,25 @@ func attack() -> void:
 	is_attacking = true
 	await get_tree().create_timer(attack_timer, false).timeout
 	if temp_target != null:
-		temp_target.damage(attack_power, self)
+		animation_player.speed_scale = 1
+		animation_player.play(anims.pick_random())
+		await animation_player.animation_finished
+		animation_player.speed_scale = 2
+		animation_player.play("voidling/walk")
+		if temp_target != null:
+			temp_target.damage(attack_power, self)
+		else:
+			target.damage(attack_power)
 	else:
-		target.damage(attack_power)
+		animation_player.speed_scale = 1
+		animation_player.play(anims.pick_random())
+		await animation_player.animation_finished
+		animation_player.speed_scale = 2
+		animation_player.play("voidling/walk")
+		if temp_target == null:
+			target.damage(attack_power)
+		else:
+			temp_target.damage(attack_power, self)
 	is_attacking = false
 
 func damage(amount:float) -> void:

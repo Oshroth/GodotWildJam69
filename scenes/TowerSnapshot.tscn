@@ -1,21 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0g34kspvjc2v"]
+[gd_scene load_steps=6 format=3 uid="uid://d0g34kspvjc2v"]
 
 [ext_resource type="Script" path="res://scripts/TowerScreenshot.gd" id="1_wwhxl"]
 [ext_resource type="PackedScene" uid="uid://b6d8lj1x8brtj" path="res://3DArt/Models/rock_sentry.gltf" id="3_bfrtw"]
-[ext_resource type="Script" path="res://scripts/SnapshotModel.gd" id="3_kbqe1"]
-[ext_resource type="PackedScene" uid="uid://70dua71j1km2" path="res://3DArt/Models/tree_sentry.gltf" id="3_wfuge"]
-
-[sub_resource type="Resource" id="Resource_ea8f2"]
-script = ExtResource("3_kbqe1")
-filename = "tree_sentry_icon.png"
-mesh = ExtResource("3_wfuge")
-offset = Vector3(0, -0.096, 0)
-
-[sub_resource type="Resource" id="Resource_yl5ub"]
-script = ExtResource("3_kbqe1")
-filename = "rock_sentry_icon.png"
-mesh = ExtResource("3_bfrtw")
-offset = Vector3(0, 0, 0)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kewoj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,9 +18,10 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("dumb_models")]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0.138087, 0)
 script = ExtResource("1_wwhxl")
-models = Array[ExtResource("3_kbqe1")]([SubResource("Resource_ea8f2"), SubResource("Resource_yl5ub")])
+dumb_models = [NodePath("SubViewport/rock_icon_dumb")]
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -52,3 +39,14 @@ environment = SubResource("Environment_7t4hu")
 transform = Transform3D(-0.966133, -0.0134915, 0.257691, 4.57078e-09, 0.998632, 0.0522837, -0.258044, 0.050513, -0.964812, 0.39013, 0.765031, -1.25067)
 current = true
 size = 4.0
+
+[node name="rock_icon_dumb" parent="SubViewport" instance=ExtResource("3_bfrtw")]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 0, 0.138087, 0)
+
+[node name="floor2" parent="SubViewport/rock_icon_dumb/Node" index="0"]
+visible = false
+
+[node name="rocks" parent="SubViewport/rock_icon_dumb/Node/tower4" index="2"]
+visible = false
+
+[editable path="SubViewport/rock_icon_dumb"]

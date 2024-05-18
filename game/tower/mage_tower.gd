@@ -23,7 +23,7 @@ func _ready() -> void:
 	$CanvasLayer/ProgressBar.max_value = max_health
 
 func _process(_delta: float) -> void:
-	$CanvasLayer/Label.text = str(gold)
+	$CanvasLayer/TextureRect2/Label.text = str(gold)
 
 func damage(amount:float) -> void:
 	current_health -= amount
