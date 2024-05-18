@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=29 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
@@ -57,6 +57,12 @@ scale_min = 1.5
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_jsqpm")
 
+[sub_resource type="Curve" id="Curve_nnact"]
+min_value = 0.15
+max_value = 1.5
+_data = [Vector2(0, 0.203312), 0.0, 0.0, 0, 0, Vector2(0.547692, 1.38822), 0.0, 0.0, 0, 0, Vector2(0.686901, 0.260171), 0.0, 0.0, 0, 0, Vector2(0.827692, 1.45529), 0.0, 0.0, 0, 0, Vector2(0.910543, 0.20673), 0.0, 0.0, 0, 0, Vector2(0.993846, 1.47764), 0.0, 0.0, 0, 0]
+point_count = 6
+
 [sub_resource type="NavigationMesh" id="NavigationMesh_e0jfx"]
 vertices = PackedVector3Array(-99.5, 0.5, -99.5, -99.5, 0.5, 99.5, 99.5, 0.5, 99.5, 99.5, 0.5, -99.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
@@ -71,6 +77,7 @@ size = Vector3(3, 2, 3)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_4skrw")
+dialog = Array[String](["TEXT 1", "TEXT 2", "TEXT 2", "TEXT 2TEXT 2TEXT 2TEXT 2", "TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2"])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6w507")
@@ -174,6 +181,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.7591, 0, 0)
 script = ExtResource("5_13m4a")
 spawn_radius = 75.0
 main_target = NodePath("../MageTower")
+difficultycurve = SubResource("Curve_nnact")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_e0jfx")
@@ -222,10 +230,34 @@ bus = &"SFX"
 [node name="WinTimer" type="Timer" parent="."]
 wait_time = 120.0
 one_shot = true
-autostart = true
 
 [node name="blockbench_export" parent="." instance=ExtResource("16_xb43w")]
 transform = Transform3D(-0.515472, 0, -0.856907, 0, 1, 0, 0.856907, 0, -0.515472, 4.8578, 0, 2.10661)
+
+[node name="DialogUI" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="DialogUI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -314.0
+offset_top = -203.0
+offset_right = 314.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="dialog_label" type="Label" parent="DialogUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+autowrap_mode = 2
 
 [connection signal="gold_changed" from="MageTower" to="TowerPlacer" method="_on_mage_tower_gold_changed"]
 [connection signal="gold_changed" from="MageTower" to="GameUI" method="_on_gold_changed"]

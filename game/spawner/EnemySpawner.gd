@@ -3,19 +3,27 @@ extends Node3D
 @export var spawn_timer:float = 1.5
 @export var spawn_radius:float = 1
 @export var main_target:Node3D
+@export var difficultycurve:Curve
+@onready var win_timer = $"../WinTimer"
+
+
 
 var current_spawn_timer:float = 1.5
+var game_time:float
 
 var enemies:Array[PackedScene] = [
 	preload("res://game/enemies/voidling/voidling.tscn")
 ]
 
 func _ready():
+	game_time = win_timer.wait_time
 	set_process(false)
 
 func _process(delta: float) -> void:
 	current_spawn_timer -= delta
 	if current_spawn_timer <= 0:
+		spawn_timer = difficultycurve.sample(win_timer.time_left/game_time)
+		print(spawn_timer)
 		current_spawn_timer = spawn_timer
 		_spawn_random_enemy()
 
