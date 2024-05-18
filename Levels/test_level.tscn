@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bprb7matuusms"]
+[gd_scene load_steps=25 format=3 uid="uid://bprb7matuusms"]
 
 [ext_resource type="PackedScene" uid="uid://dd4lqcr3dl65m" path="res://Player/player.tscn" id="3_fw4h6"]
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="4_ahymr"]
@@ -80,6 +80,9 @@ shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_n6abk")
 
 [sub_resource type="SphereMesh" id="SphereMesh_nlcha"]
 
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_5tdbt"]
+exposure_multiplier = 0.0
+
 [sub_resource type="Curve" id="Curve_rmvjn"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498084, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0286168), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -158,6 +161,7 @@ script = ExtResource("8_x28wm")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 transform = Transform3D(0.866025, -0.244805, 0.435971, 0, 0.871941, 0.48961, -0.5, -0.424015, 0.755123, 15.4276, 14.2036, 25.825)
+attributes = SubResource("CameraAttributesPhysical_5tdbt")
 projection = 1
 current = true
 size = 30.0

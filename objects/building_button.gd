@@ -2,6 +2,9 @@ extends Button
 
 class_name BuildingButton
 
+@onready var audio_stream_player = $AudioStreamPlayer
+
+
 @export var building_cost: int:
 	set(value):
 		building_cost = value
@@ -15,3 +18,9 @@ class_name BuildingButton
 func _ready() -> void:
 	name_label.text = building_name
 	cost_label.text = str(building_cost)
+
+
+func _on_mouse_entered():
+	if disabled == false:
+		audio_stream_player.play()
+

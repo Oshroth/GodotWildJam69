@@ -23,9 +23,9 @@ func _physics_process(_delta: float) -> void:
 	if navigation_agent.is_navigation_finished() && is_attacking:
 		return
 	
-	var target_direction:Vector3 = target.position - position
+	var target_direction:Vector3 = target.global_transform.origin - global_transform.origin
 	if temp_target != null:
-		target_direction = temp_target.position - position
+		target_direction = temp_target.global_transform.origin - global_transform.origin
 
 	if target_direction.length() < attack_distance:
 		attack()

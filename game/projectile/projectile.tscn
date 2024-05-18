@@ -9,6 +9,7 @@ radius = 0.946162
 
 [node name="Projectile" type="Node3D"]
 script = ExtResource("1_fcuil")
+speed = 15.0
 
 [node name="seed" parent="." instance=ExtResource("2_b1q6w")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
@@ -20,6 +21,7 @@ visible = false
 shape = SubResource("SphereShape3D_hvrhd")
 
 [node name="rock" parent="." instance=ExtResource("3_ljl0r")]
-transform = Transform3D(1.14278, 0, 0, 0, 1.14278, 0, 0, 0, 1.14278, 0, 0, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+visible = false
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

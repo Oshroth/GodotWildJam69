@@ -1,10 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqx4w5ipy3nds"]
+[gd_scene load_steps=14 format=3 uid="uid://bqx4w5ipy3nds"]
 
 [ext_resource type="Script" path="res://game/tower/tower.gd" id="1_an7g4"]
 [ext_resource type="PackedScene" uid="uid://c7kwu4qtb1klf" path="res://game/projectile/projectile.tscn" id="2_0lvhn"]
 [ext_resource type="PackedScene" uid="uid://b6d8lj1x8brtj" path="res://3DArt/Models/rock_sentry.gltf" id="3_712i7"]
 [ext_resource type="Animation" uid="uid://dqpqp7k8aust0" path="res://3DArt/Animations/rock/rock_idle.res" id="4_pewkl"]
 [ext_resource type="Animation" uid="uid://d1kmoypi1xkfq" path="res://3DArt/Animations/rock/rock_attack.res" id="5_c82n6"]
+[ext_resource type="AudioStream" uid="uid://butu0e7qm60wu" path="res://Audio/Rock_attack_guy.wav" id="6_e8s2g"]
+[ext_resource type="AudioStream" uid="uid://bjmuyejjfmpbk" path="res://Audio/Rock_attack_guy_2.wav" id="7_l0po0"]
+
+[sub_resource type="Animation" id="Animation_yufga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4ka6"]
+_data = {
+"RESET": SubResource("Animation_yufga")
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n1bko"]
 _data = {
@@ -18,7 +40,15 @@ size = Vector3(1, 1.7486, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_whlon"]
 radius = 5.4
 
-[node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player", "target_finder")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7yfvk"]
+random_pitch = 1.4
+streams_count = 2
+stream_0/stream = ExtResource("6_e8s2g")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_l0po0")
+stream_1/weight = 1.0
+
+[node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player", "tower_mesh", "target_finder")]
 script = ExtResource("1_an7g4")
 health = 0.0
 max_health = 20.0
@@ -29,14 +59,28 @@ attack_timer = 1.5
 projectile_position = NodePath("ProjectilePosition")
 animation_player = NodePath("AnimationPlayer")
 animation_idle = "rock/rock_idle"
+tower_mesh = NodePath("Visual/Node/tower4")
 target_finder = NodePath("TargetFinder")
 animation_attack = "rock/rock_attack"
 
 [node name="Visual" parent="." instance=ExtResource("3_712i7")]
 
+[node name="body" parent="Visual/Node/tower4" index="0"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 8.95341e-19, 0.1875, -1.64519e-17)
+
+[node name="rocks" parent="Visual/Node/tower4" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.625)
+
+[node name="1" parent="Visual/Node/tower4/rocks" index="0"]
+transform = Transform3D(0.482963, -0.866025, -0.12941, 0.836516, 0.5, -0.224144, 0.258819, -1.2666e-07, 0.965926, 0.3125, 0.015625, 0)
+
+[node name="2" parent="Visual/Node/tower4/rocks" index="1"]
+transform = Transform3D(0.224144, 0.687541, 0.690686, -0.836516, 0.499344, -0.225601, -0.5, -0.527203, 0.687064, -0.3125, 0.015625, 0)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Visual")
 libraries = {
+"": SubResource("AnimationLibrary_w4ka6"),
 "rock": SubResource("AnimationLibrary_n1bko")
 }
 
@@ -56,4 +100,9 @@ shape = SubResource("SphereShape3D_whlon")
 [node name="ProjectilePosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.503898, -0.646438)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_7yfvk")
+
 [connection signal="body_entered" from="TargetFinder" to="." method="_on_target_finder_body_entered"]
+
+[editable path="Visual"]

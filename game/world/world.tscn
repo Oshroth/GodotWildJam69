@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=27 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
@@ -14,6 +14,8 @@
 [ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="10_0kmq2"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="10_edop1"]
 [ext_resource type="Resource" uid="uid://cqurmunffgqe2" path="res://objects/RockSentry.tres" id="12_ohaua"]
+[ext_resource type="AudioStream" uid="uid://kq3kj6hrdekr" path="res://Audio/Void_Ambience.wav" id="15_jk2k0"]
+[ext_resource type="PackedScene" uid="uid://snwpf8y8obo1" path="res://3DArt/Models/void_wizard.gltf" id="16_xb43w"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -118,16 +120,17 @@ transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_7x2pv")
 
 [node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09805, 0, 5.21553)
 script = ExtResource("5_fc5ra")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(0.792289, -0.298594, 0.532089, 0, 0.872069, 0.489382, -0.610145, -0.387733, 0.690931, 2.028, 12.674, 17.805)
+transform = Transform3D(0.79229, -0.298595, 0.532089, 0, 0.872069, 0.489383, -0.610145, -0.387733, 0.690931, 13.0838, 12.674, 12.5895)
 projection = 1
 current = true
-size = 30.0
+size = 6.506
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.31654, -0.575008, 3.66592)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3724, -0.575008, -1.54961)
 amount = 64
 lifetime = 4.0
 preprocess = 4.0
@@ -174,11 +177,26 @@ enabled = false
 shape = SubResource("BoxShape3D_0oave")
 target_position = Vector3(0, 0, 0)
 max_results = 1
-collision_mask = 25
+collision_mask = 24
 collide_with_areas = true
 
 [node name="GameUI" parent="." instance=ExtResource("10_edop1")]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_jk2k0")
+volume_db = 5.0
+autoplay = true
+bus = &"SFX"
+
+[node name="WinTimer" type="Timer" parent="."]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[node name="blockbench_export" parent="." instance=ExtResource("16_xb43w")]
+transform = Transform3D(-0.515472, 0, -0.856907, 0, 1, 0, 0.856907, 0, -0.515472, 4.8578, 0, 2.10661)
+
 [connection signal="gold_changed" from="MageTower" to="TowerPlacer" method="_on_mage_tower_gold_changed"]
 [connection signal="gold_changed" from="MageTower" to="GameUI" method="_on_gold_changed"]
 [connection signal="buildTower" from="GameUI" to="TowerPlacer" method="_on_game_ui_build_tower"]
+[connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]

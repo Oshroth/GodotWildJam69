@@ -10,6 +10,9 @@ var enemies:Array[PackedScene] = [
 	preload("res://game/enemies/voidling/voidling.tscn")
 ]
 
+func _ready():
+	set_process(false)
+
 func _process(delta: float) -> void:
 	current_spawn_timer -= delta
 	if current_spawn_timer <= 0:
@@ -24,3 +27,7 @@ func _spawn_random_enemy() -> void:
 	get_parent().add_child(new_enemy)
 	new_enemy.global_position = spawn_position
 	new_enemy.enter_world(main_target)
+
+func start():
+	print("game should start")
+	set_process(true)
