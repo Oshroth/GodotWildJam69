@@ -12,7 +12,6 @@ var temp_target:Node3D = null
 @export var gold_worth:int = 10
 @export var attack_distance:float = 5.0
 @export var awareness:Area3D
-@onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 @onready var death_sound = $death_sound
 @onready var animation_player = $AnimationPlayer
 
@@ -22,50 +21,53 @@ var is_attacking := false
 var anims:Array[String] = ["voidling/attack","voidling/attack2"]
 
 func _physics_process(_delta: float) -> void:
-	if navigation_agent.is_navigation_finished() && is_attacking:
+	if is_attacking:
 		return
 	
 	var target_direction:Vector3 = target.global_transform.origin - global_transform.origin
+	var attacking_temp:bool = false
 	if temp_target != null:
+		attacking_temp = true
+		look_at(temp_target.global_position)
 		target_direction = temp_target.global_transform.origin - global_transform.origin
-
+	else:
+		look_at(target.global_position)
+		
 	if target_direction.length() < attack_distance:
-		attack()
+		attack(attacking_temp)
 		return
 	else:
 		animation_player.play("voidling/walk")
-	var current_agent_position: Vector3 = global_position
-	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
-	look_at(next_path_position)
-	velocity = current_agent_position.direction_to(next_path_position) * speed
+		
+	
+	velocity = target_direction.normalized() * speed
 	move_and_slide()
 
-func attack() -> void:
+func attack(which) -> void:
 	if is_attacking:
 		return
 	
 	is_attacking = true
 	await get_tree().create_timer(attack_timer, false).timeout
-	if temp_target != null:
-		animation_player.speed_scale = 1
-		animation_player.play(anims.pick_random())
-		await animation_player.animation_finished
-		animation_player.speed_scale = 2
-		animation_player.play("voidling/walk")
+	if which:
 		if temp_target != null:
-			temp_target.damage(attack_power, self)
-		else:
-			target.damage(attack_power)
+			animation_player.speed_scale = 1
+			animation_player.play(anims.pick_random())
+			await animation_player.animation_finished
+			animation_player.speed_scale = 2
+			animation_player.play("voidling/walk")
+			if temp_target != null:
+				temp_target.damage(attack_power, self)
 	else:
 		animation_player.speed_scale = 1
 		animation_player.play(anims.pick_random())
 		await animation_player.animation_finished
 		animation_player.speed_scale = 2
 		animation_player.play("voidling/walk")
-		if temp_target == null:
+		if target != null:
+			print(target.global_position.distance_to(global_position))
 			target.damage(attack_power)
-		else:
-			temp_target.damage(attack_power, self)
+
 	is_attacking = false
 
 func damage(amount:float) -> void:
@@ -75,29 +77,29 @@ func damage(amount:float) -> void:
 
 func die() -> void:
 	on_death.emit()
-	# TODO: Gold in world label should show the increase...
 	MageTower.instance.gold += gold_worth
 	MageTower.instance.play_enemy_death()
+	var newGain = load("res://game/crystalgain/crystalgain.tscn").instantiate()
+	newGain.text = "+"+str(gold_worth)
+	get_parent().add_child(newGain)
+	newGain.global_position = global_position
 	queue_free()
 
 func enter_world(new_target:Node3D) -> void:
 	target = new_target
 	look_at(target.position)
 	await get_tree().physics_frame
-	navigation_agent.set_target_position(target.global_position + get_random_unit_vector())
 
 func get_random_unit_vector() -> Vector3:
 	return Vector3(randf_range(-1,1), 0, randf_range(-1,1)).normalized()
 
 func _on_awareness_area_area_entered(area: Area3D) -> void:
-	if area.get_parent() is TowerB:
+	if area.get_parent() is TowerB and temp_target == null:
 		temp_target = area.get_parent_node_3d()
 		temp_target.on_death.connect(_reacquire_target)
-		navigation_agent.set_target_position(temp_target.global_position + get_random_unit_vector())
 
 func _reacquire_target() -> void:
 	temp_target = null
-	navigation_agent.set_target_position(target.global_position + get_random_unit_vector())
 
 func acquire_target() -> void:
 	if target == null:

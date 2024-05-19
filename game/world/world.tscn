@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=36 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
@@ -15,13 +15,13 @@
 [ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="10_0kmq2"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="10_edop1"]
 [ext_resource type="Resource" uid="uid://cqurmunffgqe2" path="res://objects/RockSentry.tres" id="12_ohaua"]
-[ext_resource type="AudioStream" path="res://Audio/Void_Ambience_2.wav" id="16_jjp52"]
+[ext_resource type="AudioStream" uid="uid://cj7xid2ksmucu" path="res://Audio/Void_Ambience_2.wav" id="16_jjp52"]
 [ext_resource type="PackedScene" uid="uid://snwpf8y8obo1" path="res://3DArt/Models/void_wizard.gltf" id="16_xb43w"]
 [ext_resource type="Script" path="res://Player/void_wizard.gd" id="18_ou36d"]
 [ext_resource type="Animation" uid="uid://dun5ncyvrk1dn" path="res://3DArt/Animations/Player/walk.res" id="19_ucl0x"]
 [ext_resource type="Animation" uid="uid://l48rarvd4aba" path="res://3DArt/Animations/Player/idle.res" id="20_o8dly"]
-[ext_resource type="AudioStream" path="res://Audio/GJ69TowerDefense_MX_betweenWaves_-15dB.wav" id="21_pjlca"]
-[ext_resource type="AudioStream" path="res://Audio/GJ69TowerDefense_MX_duringWaves_-15dB.wav" id="22_livjx"]
+[ext_resource type="AudioStream" uid="uid://red1p3rprwx1" path="res://Audio/GJ69TowerDefense_MX_betweenWaves_-15dB.wav" id="21_pjlca"]
+[ext_resource type="AudioStream" uid="uid://bgtpppexlrbvn" path="res://Audio/GJ69TowerDefense_MX_duringWaves_-15dB.wav" id="22_livjx"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -65,15 +65,8 @@ scale_curve = SubResource("CurveTexture_jsqpm")
 [sub_resource type="Curve" id="Curve_nnact"]
 min_value = 0.15
 max_value = 1.5
-_data = [Vector2(0.252308, 0.15), 0.0, 0.0, 0, 0, Vector2(0.898462, 1.5), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_e0jfx"]
-vertices = PackedVector3Array(-99.5, 0.5, -99.5, -99.5, 0.5, 99.5, 99.5, 0.5, 99.5, 99.5, 0.5, -99.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_fwq5o"]
-size = Vector2(200, 200)
+_data = [Vector2(0.252308, 0.15), 0.0, 0.0, 0, 0, Vector2(0.655963, 0.965934), -3.35966, -3.35966, 0, 0, Vector2(0.811927, 0.506044), 0.53901, 0.53901, 0, 0, Vector2(0.898462, 1.5), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_jx5kv"]
 
@@ -172,6 +165,7 @@ environment = SubResource("Environment_6w507")
 unique_name_in_owner = true
 transform = Transform3D(0.948119, 0, -5.37705, 0, 5.46, 0, 5.37705, 0, 0.948119, -11.7548, 0, 4.70232)
 script = ExtResource("3_pl4ac")
+max_health = 500.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MageTower"]
 
@@ -229,6 +223,17 @@ grow_vertical = 2
 texture = ExtResource("4_g2fun")
 stretch_mode = 4
 
+[node name="Label" type="Label" parent="MageTower/CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 24.0
+offset_right = 52.0
+offset_bottom = 47.0
+grow_horizontal = 2
+text = "Tower Health"
+
 [node name="death_sound" type="AudioStreamPlayer" parent="MageTower"]
 stream = SubResource("AudioStreamRandomizer_4aeh8")
 max_polyphony = 5
@@ -268,13 +273,6 @@ script = ExtResource("5_13m4a")
 spawn_radius = 75.0
 main_target = NodePath("../MageTower")
 difficultycurve = SubResource("Curve_nnact")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_e0jfx")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
-visible = false
-mesh = SubResource("PlaneMesh_fwq5o")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)

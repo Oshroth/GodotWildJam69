@@ -628,8 +628,8 @@ _data = {
 
 [node name="tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player", "tower_mesh", "hit_effect_targets", "target_finder")]
 script = ExtResource("1_fati0")
-health = 20.0
-max_health = 20.0
+health = 15.0
+max_health = 15.0
 projectile = ExtResource("2_xhsty")
 projectile_model = "seed"
 damage_amount = 5.0

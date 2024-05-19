@@ -5,8 +5,6 @@
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_hk3v3")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
 [node name="AwarenessArea" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 8

@@ -9,7 +9,7 @@ var my_tween:Tween
 
 func _input(_event: InputEvent) -> void:
 	
-	if Input.is_action_just_pressed("scroll_down") and camera_3d.size <= 30:
+	if Input.is_action_just_pressed("scroll_down") and camera_3d.size <= 45:
 		camera_3d.size += 2.5
 	
 	if Input.is_action_just_pressed("scroll_up") and camera_3d.size >= 5:

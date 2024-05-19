@@ -50,7 +50,7 @@ stream_1/weight = 1.0
 
 [node name="Tower" type="Node3D" node_paths=PackedStringArray("projectile_position", "animation_player", "tower_mesh", "hit_effect_targets", "target_finder")]
 script = ExtResource("1_an7g4")
-health = 0.0
+health = 20.0
 max_health = 20.0
 projectile = ExtResource("2_0lvhn")
 projectile_model = "rock"

@@ -8,11 +8,11 @@
 [ext_resource type="Animation" uid="uid://cj2qhqfrjsjpg" path="res://3DArt/Animations/Voidling/attack2.res" id="5_th5t7"]
 [ext_resource type="AudioStream" uid="uid://d0842dfh8m1jr" path="res://Audio/Enemy_loot_2.wav" id="5_xjqqp"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_7x8ot"]
+radius = 9.915
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_kubpc"]
 size = Vector3(0.762695, 0.237427, 3.18555)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_7x8ot"]
-radius = 6.49577
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p0lli"]
 _data = {
@@ -32,8 +32,14 @@ stream_1/weight = 1.0
 [node name="Enemy" instance=ExtResource("1_2bnrm")]
 collision_layer = 17
 collision_mask = 2
+speed = 2.5
 attack_timer = 0.25
+attack_power = 6.0
+gold_worth = 2
 attack_distance = 2.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AwarenessArea" index="0"]
+shape = SubResource("SphereShape3D_7x8ot")
 
 [node name="Visual" parent="." index="1" instance=ExtResource("2_xt6kj")]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
@@ -42,10 +48,7 @@ transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0162048, 0.0800228, 0.120544)
 shape = SubResource("BoxShape3D_kubpc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AwarenessArea" index="0"]
-shape = SubResource("SphereShape3D_7x8ot")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 root_node = NodePath("../Visual")
 libraries = {
 "voidling": SubResource("AnimationLibrary_p0lli")
@@ -53,6 +56,6 @@ libraries = {
 autoplay = "voidling/walk"
 speed_scale = 2.0
 
-[node name="death_sound" type="AudioStreamPlayer" parent="." index="5"]
+[node name="death_sound" type="AudioStreamPlayer" parent="." index="4"]
 stream = SubResource("AudioStreamRandomizer_3bkt2")
 bus = &"SFX"

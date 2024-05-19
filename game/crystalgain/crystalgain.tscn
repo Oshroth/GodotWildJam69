@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://nvnerfmthb2w"]
+
+[ext_resource type="Script" path="res://game/crystalgain/crystalgain.gd" id="1_hbu7h"]
+
+[sub_resource type="FontVariation" id="FontVariation_2n82k"]
+
+[node name="Crystalgain" type="Label3D"]
+pixel_size = 0.05
+billboard = 1
+modulate = Color(1, 0, 0.983333, 1)
+text = "+2"
+font = SubResource("FontVariation_2n82k")
+font_size = 48
+script = ExtResource("1_hbu7h")
