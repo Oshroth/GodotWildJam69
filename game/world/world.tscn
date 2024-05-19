@@ -11,17 +11,17 @@
 [ext_resource type="ArrayMesh" uid="uid://mq30y3od6rul" path="res://3DArt/Meshes/blockbench_export_mesh.res" id="6_g6y1v"]
 [ext_resource type="AudioStream" uid="uid://d0842dfh8m1jr" path="res://Audio/Enemy_loot_2.wav" id="6_rslqj"]
 [ext_resource type="Script" path="res://scripts/TowerPlacer.gd" id="6_voolx"]
-[ext_resource type="Material" uid="uid://67g7n0a3oyxp" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
+[ext_resource type="Material" path="res://assets/PlaceholderMat.tres" id="9_wr7oq"]
 [ext_resource type="Resource" uid="uid://ysdn8utbtsej" path="res://objects/TreeSentry.tres" id="10_0kmq2"]
 [ext_resource type="PackedScene" uid="uid://banowsxlou1aq" path="res://objects/game_ui.tscn" id="10_edop1"]
 [ext_resource type="Resource" uid="uid://cqurmunffgqe2" path="res://objects/RockSentry.tres" id="12_ohaua"]
-[ext_resource type="AudioStream" uid="uid://cj7xid2ksmucu" path="res://Audio/Void_Ambience_2.wav" id="16_jjp52"]
+[ext_resource type="AudioStream" path="res://Audio/Void_Ambience_2.wav" id="16_jjp52"]
 [ext_resource type="PackedScene" uid="uid://snwpf8y8obo1" path="res://3DArt/Models/void_wizard.gltf" id="16_xb43w"]
 [ext_resource type="Script" path="res://Player/void_wizard.gd" id="18_ou36d"]
 [ext_resource type="Animation" uid="uid://dun5ncyvrk1dn" path="res://3DArt/Animations/Player/walk.res" id="19_ucl0x"]
 [ext_resource type="Animation" uid="uid://l48rarvd4aba" path="res://3DArt/Animations/Player/idle.res" id="20_o8dly"]
-[ext_resource type="AudioStream" uid="uid://red1p3rprwx1" path="res://Audio/GJ69TowerDefense_MX_betweenWaves_-15dB.wav" id="21_pjlca"]
-[ext_resource type="AudioStream" uid="uid://bgtpppexlrbvn" path="res://Audio/GJ69TowerDefense_MX_duringWaves_-15dB.wav" id="22_livjx"]
+[ext_resource type="AudioStream" path="res://Audio/GJ69TowerDefense_MX_betweenWaves_-15dB.wav" id="21_pjlca"]
+[ext_resource type="AudioStream" path="res://Audio/GJ69TowerDefense_MX_duringWaves_-15dB.wav" id="22_livjx"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -162,7 +162,6 @@ _data = {
 }
 
 [node name="World" type="Node3D"]
-transform = Transform3D(-0.241431, 0, 0.970418, 0, 1, 0, -0.970418, 0, -0.241431, -10.2017, 0, 4.90103)
 script = ExtResource("1_4skrw")
 dialog = Array[String](["Finally I cant believe they took so long to send someone.", "What !? The wizard college didnt send you here ?", "Well... I guess you will be usefeul either way. I have a spell that might get us both out of this place but it takes a while to cast and the magical energy attracts the worms.", "If you can defend my castle for long enough then we will be home in no time !", "Take these crystal, I found them while dealing with some worms a while ago. You can use them to summon golems from my spellbook.", "Remeber you can look around with A/D and get close by or far away with the mouse wheel.", "I believe thats all... Will start the spell be aware they will arrive at any moment."])
 
@@ -285,7 +284,7 @@ visible = false
 shape = SubResource("WorldBoundaryShape3D_jx5kv")
 
 [node name="TowerPlacer" type="Node3D" parent="." node_paths=PackedStringArray("game_ui")]
-transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("6_voolx")
 towers = Array[Resource("res://scripts/Building.gd")]([ExtResource("10_0kmq2"), ExtResource("12_ohaua")])
 placeholder_mat = ExtResource("9_wr7oq")
