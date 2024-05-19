@@ -14,7 +14,7 @@
 size = Vector3(1, 1.7486, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_whlon"]
-radius = 6.0
+radius = 10.0
 
 [sub_resource type="Animation" id="Animation_enenl"]
 length = 0.001
@@ -641,6 +641,7 @@ tower_mesh = NodePath("Visual/Node/tower3")
 hit_effect_targets = [NodePath("Visual/Node/tower3/trunk/leafs/sphere"), NodePath("Visual/Node/tower3/trunk/face/nose/cuboid")]
 target_finder = NodePath("TargetFinder")
 animation_attack = "tree/attack"
+distance = 20.0
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8
@@ -671,6 +672,7 @@ stream = SubResource("AudioStreamRandomizer_ui02p")
 bus = &"SFX"
 
 [node name="Visual" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Node" type="Node3D" parent="Visual"]
 

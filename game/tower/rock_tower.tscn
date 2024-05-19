@@ -38,7 +38,7 @@ _data = {
 size = Vector3(1, 1.7486, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_whlon"]
-radius = 5.4
+radius = 12.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7yfvk"]
 random_pitch = 1.4
@@ -63,8 +63,10 @@ tower_mesh = NodePath("Visual/Node/tower4")
 hit_effect_targets = [NodePath("Visual/Node/tower4/body/sphere")]
 target_finder = NodePath("TargetFinder")
 animation_attack = "rock/rock_attack"
+distance = 20.0
 
 [node name="Visual" parent="." instance=ExtResource("3_712i7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="body" parent="Visual/Node/tower4" index="0"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 8.95341e-19, 0.1875, -1.64519e-17)
