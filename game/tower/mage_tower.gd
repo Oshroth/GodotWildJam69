@@ -8,6 +8,9 @@ static var instance: MageTower = null
 
 @export var max_health:float = 1000
 var current_health:float
+@onready var progress_bar = $CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/ProgressBar
+@onready var time_label = $CanvasLayer/TimerPanel/MarginContainer/VBoxContainer/Time
+@onready var win_timer = $"../WinTimer"
 
 @onready var death_sound = $death_sound
 
@@ -20,16 +23,19 @@ var gold:int = 200:
 func _ready() -> void:
 	current_health = max_health
 	instance = self
-	$CanvasLayer/ProgressBar.value = max_health
-	$CanvasLayer/ProgressBar.max_value = max_health
+	progress_bar.value = max_health
+	progress_bar.max_value = max_health
+	
+	time_label.text = str(ceil(win_timer.time_left))
 
 func _process(_delta: float) -> void:
-	$CanvasLayer/TextureRect2/Label.text = str(gold)
+	$CanvasLayer/GoldPanel/MarginContainer/TextureRect2/Label.text = str(gold)
+	time_label.text = str(ceil(win_timer.time_left))
 
 func damage(amount:float) -> void:
 	current_health -= amount
-	$CanvasLayer/ProgressBar.value = current_health
-	$CanvasLayer/ProgressBar.max_value = max_health
+	progress_bar.value = current_health
+	progress_bar.max_value = max_health
 	if current_health <= 0:
 		tower_destroyed.emit()
 

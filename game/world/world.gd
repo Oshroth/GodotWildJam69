@@ -3,7 +3,7 @@ extends Node3D
 signal level_lost
 signal level_won
 
-@export var dialog:Array[String]
+@export_multiline var dialog:Array[String]
 @onready var enemy_spawner = $EnemySpawner
 @onready var dialog_label = $DialogUI/ColorRect/dialog_label
 @onready var game_ui = $GameUI

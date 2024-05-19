@@ -8,3 +8,10 @@
 game_scene_path = "res://scenes/GameScene/GameUI.tscn"
 options_packed_scene = ExtResource("2_sphge")
 credits_packed_scene = ExtResource("3_j257y")
+version_name = "1.0.0"
+
+[node name="Title" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="0"]
+text = "Duck Wizard"
+
+[node name="SubTitle" parent="MenuContainer/VBoxContainer/TitlesMargin/TitlesContainer" index="1"]
+text = "The Void Escape"
