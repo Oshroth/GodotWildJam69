@@ -226,7 +226,7 @@ collide_with_areas = true
 stream = ExtResource("15_jk2k0")
 volume_db = 5.0
 autoplay = true
-bus = &"SFX"
+bus = &"Music"
 
 [node name="WinTimer" type="Timer" parent="."]
 wait_time = 120.0
