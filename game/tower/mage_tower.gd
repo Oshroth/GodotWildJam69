@@ -26,11 +26,14 @@ func _ready() -> void:
 	progress_bar.value = max_health
 	progress_bar.max_value = max_health
 	
-	time_label.text = str(ceil(win_timer.time_left))
+	time_label.text = ""
 
 func _process(_delta: float) -> void:
 	$CanvasLayer/GoldPanel/MarginContainer/TextureRect2/Label.text = str(gold)
-	time_label.text = str(ceil(win_timer.time_left))
+	if win_timer.is_stopped():
+		time_label.text = str(ceil(win_timer.wait_time))
+	else:
+		time_label.text = str(ceil(win_timer.time_left))
 
 func damage(amount:float) -> void:
 	current_health -= amount

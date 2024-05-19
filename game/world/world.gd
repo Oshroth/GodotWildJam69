@@ -39,9 +39,10 @@ func _on_tower_destroyed():
 	level_lost.emit()
 
 func _process(delta):
-	if intro_active and (Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_cancel")):
+	if intro_active and Input.is_action_just_pressed("ui_cancel"):
 		baby_tween.kill()
 		dialog_index = dialog.size()
+		audio_stream_player.stop()
 		manage_intro()
 	if intro_active and Input.is_action_just_pressed("place_building"):
 		if talking:

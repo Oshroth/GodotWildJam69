@@ -433,6 +433,7 @@ speed_scale = 2.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="wizard"]
 stream = ExtResource("24_l6aox")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="DialogUI" type="CanvasLayer" parent="."]
 
