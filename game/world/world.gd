@@ -11,6 +11,8 @@ signal level_won
 @onready var dialog_ui = $DialogUI
 @onready var win_timer = $WinTimer
 @onready var mage_tower: MageTower = $MageTower
+@onready var intro_cutscene = $IntroCutscene
+
 
 
 var baby_tween:Tween
@@ -51,19 +53,23 @@ func manage_intro():
 		dialog_ui.hide()
 		game_ui.show()
 		canvas_layer.show()
-		win_timer.start()
-		enemy_spawner.start()
-		set_process(false)
+		intro_cutscene.play("walk_to_end")
 	else:
 		var text:String = dialog.pop_front()
 		dialog_label.text = text
 		dialog_label.visible_ratio = 0
 		talking = true
 		baby_tween = create_tween()
-		baby_tween.tween_property(dialog_label,"visible_ratio",1,text.length()/5)
+		baby_tween.tween_property(dialog_label,"visible_ratio",1,text.length()/30)
 		baby_tween.finished.connect(tween_finished)
 
 func tween_finished():
 	talking = false
 	
 
+
+
+func _on_intro_cutscene_animation_finished(anim_name):
+		win_timer.start()
+		enemy_spawner.start()
+		set_process(false)

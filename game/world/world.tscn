@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=36 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
@@ -17,6 +17,9 @@
 [ext_resource type="Resource" uid="uid://cqurmunffgqe2" path="res://objects/RockSentry.tres" id="12_ohaua"]
 [ext_resource type="AudioStream" uid="uid://kq3kj6hrdekr" path="res://Audio/Void_Ambience.wav" id="15_jk2k0"]
 [ext_resource type="PackedScene" uid="uid://snwpf8y8obo1" path="res://3DArt/Models/void_wizard.gltf" id="16_xb43w"]
+[ext_resource type="Script" path="res://Player/void_wizard.gd" id="18_ou36d"]
+[ext_resource type="Animation" uid="uid://dun5ncyvrk1dn" path="res://3DArt/Animations/Player/walk.res" id="19_ucl0x"]
+[ext_resource type="Animation" uid="uid://l48rarvd4aba" path="res://3DArt/Animations/Player/idle.res" id="20_o8dly"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -60,8 +63,8 @@ scale_curve = SubResource("CurveTexture_jsqpm")
 [sub_resource type="Curve" id="Curve_nnact"]
 min_value = 0.15
 max_value = 1.5
-_data = [Vector2(0, 0.203312), 0.0, 0.0, 0, 0, Vector2(0.547692, 1.38822), 0.0, 0.0, 0, 0, Vector2(0.686901, 0.260171), 0.0, 0.0, 0, 0, Vector2(0.827692, 1.45529), 0.0, 0.0, 0, 0, Vector2(0.910543, 0.20673), 0.0, 0.0, 0, 0, Vector2(0.993846, 1.47764), 0.0, 0.0, 0, 0]
-point_count = 6
+_data = [Vector2(0.252308, 0.15), 0.0, 0.0, 0, 0, Vector2(0.898462, 1.5), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e0jfx"]
 vertices = PackedVector3Array(-99.5, 0.5, -99.5, -99.5, 0.5, 99.5, 99.5, 0.5, 99.5, 99.5, 0.5, -99.5)
@@ -75,9 +78,91 @@ size = Vector2(200, 200)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0oave"]
 size = Vector3(3, 2, 3)
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v1nb2"]
+_data = {
+"idle": ExtResource("20_o8dly"),
+"walk": ExtResource("19_ucl0x")
+}
+
+[sub_resource type="Animation" id="Animation_pkyoc"]
+resource_name = "walk_to_end"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -2.11235, 0), Vector3(0, 1.81464, 0), Vector3(0, 1.66496, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(4.8578, 0, 2.10661), Vector3(-10.044, 0, 4.26732)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["wizard/walk"],
+"method": &"play_animation"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_r528i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -2.11235, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.8578, 0, 2.10661)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f2eyo"]
+_data = {
+"RESET": SubResource("Animation_r528i"),
+"walk_to_end": SubResource("Animation_pkyoc")
+}
+
 [node name="World" type="Node3D"]
+transform = Transform3D(-0.241431, 0, 0.970418, 0, 1, 0, -0.970418, 0, -0.241431, -10.2017, 0, 4.90103)
 script = ExtResource("1_4skrw")
-dialog = Array[String](["TEXT 1", "TEXT 2", "TEXT 2", "TEXT 2TEXT 2TEXT 2TEXT 2", "TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2TEXT 2"])
+dialog = Array[String](["Finally I cant believe they took so long to send someone.", "What !? The wizard college didnt send you here ?", "Well... I guess you will be usefeul either way. I have a spell that might get us both out of this place but it takes a while to cast and the magical energy attracts the worms.", "If you can defend my castle for long enough then we will be home in no time !", "Take these crystal, I found them while dealing with some worms a while ago. You can use them to summon golems from my spellbook.", "Remeber you can look around with A/D and get close by or far away with the mouse wheel.", "I believe thats all... Will start the spell be aware they will arrive at any moment."])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6w507")
@@ -232,8 +317,16 @@ bus = &"Music"
 wait_time = 120.0
 one_shot = true
 
-[node name="blockbench_export" parent="." instance=ExtResource("16_xb43w")]
+[node name="wizard" parent="." instance=ExtResource("16_xb43w")]
 transform = Transform3D(-0.515472, 0, -0.856907, 0, 1, 0, 0.856907, 0, -0.515472, 4.8578, 0, 2.10661)
+script = ExtResource("18_ou36d")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="wizard"]
+libraries = {
+"wizard": SubResource("AnimationLibrary_v1nb2")
+}
+autoplay = "wizard/idle"
+speed_scale = 2.0
 
 [node name="DialogUI" type="CanvasLayer" parent="."]
 
@@ -258,9 +351,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="IntroCutscene" type="AnimationPlayer" parent="."]
+root_node = NodePath("../wizard")
+libraries = {
+"": SubResource("AnimationLibrary_f2eyo")
+}
 
 [connection signal="gold_changed" from="MageTower" to="TowerPlacer" method="_on_mage_tower_gold_changed"]
 [connection signal="gold_changed" from="MageTower" to="GameUI" method="_on_gold_changed"]
 [connection signal="buildTower" from="GameUI" to="TowerPlacer" method="_on_game_ui_build_tower"]
 [connection signal="timeout" from="WinTimer" to="." method="_on_win_timer_timeout"]
+[connection signal="animation_finished" from="IntroCutscene" to="." method="_on_intro_cutscene_animation_finished"]
