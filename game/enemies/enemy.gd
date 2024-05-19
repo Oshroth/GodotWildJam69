@@ -32,7 +32,8 @@ func _physics_process(_delta: float) -> void:
 	if target_direction.length() < attack_distance:
 		attack()
 		return
-		
+	else:
+		animation_player.play("voidling/walk")
 	var current_agent_position: Vector3 = global_position
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	look_at(next_path_position)
@@ -42,7 +43,7 @@ func _physics_process(_delta: float) -> void:
 func attack() -> void:
 	if is_attacking:
 		return
-
+	
 	is_attacking = true
 	await get_tree().create_timer(attack_timer, false).timeout
 	if temp_target != null:

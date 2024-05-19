@@ -56,7 +56,6 @@ func _physics_process(_delta: float) -> void:
 func can_place_tower(point: Vector3) -> bool:
 	ghost_collider.global_position = point
 	ghost_collider.force_shapecast_update()
-	print(ghost_collider.collision_result)
 	return !ghost_collider.is_colliding()
 			
 func update_tower_ghost_visual(can_place: bool) -> void:

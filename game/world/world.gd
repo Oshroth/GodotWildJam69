@@ -20,11 +20,6 @@ signal level_won
 var baby_tween:Tween
 var talking:bool = false
 
-func spawn_enemy(instance:Enemy, pos:Vector3) -> void:
-	print("Spawn enemy")
-
-func spawn_tower(instance:Node3D, pos:Vector3) -> void:
-	print("Spawn tower")
 
 func _ready():
 	game_ui.hide()
@@ -76,6 +71,16 @@ func _on_intro_cutscene_animation_finished(anim_name):
 
 func fade_music(to_action:bool = true):
 	if to_action:
+		if music_fast == null:
+			music_fast = AudioStreamPlayer.new()
+			music_fast.autoplay = true
+			music_fast.stream = load("res://Audio/GJ69TowerDefense_MX_duringWaves_-15dB.wav")
+			add_child(music_fast)
+		if music_slow == null:
+			music_slow = AudioStreamPlayer.new()
+			music_slow.autoplay = true
+			music_slow.stream = load("res://Audio/GJ69TowerDefense_MX_betweenWaves_-15dB.wav")
+			add_child(music_slow)
 		var t = create_tween().set_parallel(true)
 		t.tween_property(music_slow,"volume_db",-80,2.0)
 		t.tween_property(music_fast,"volume_db",0,2.0)

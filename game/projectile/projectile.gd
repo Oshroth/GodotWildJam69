@@ -23,16 +23,10 @@ func _process(delta: float) -> void:
 	if target != null:
 		var direction := target.global_transform.origin - global_transform.origin
 		look_at(target.global_transform.origin)
-		#if direction.length() < 2:
-			#queue_free()
-			#target.damage(damage)
-			#
 		direction = direction.normalized()
 		global_transform.origin += direction * speed * delta
 	else:
 		queue_free()
-		
-
 
 func _on_hurtbox_body_entered(body):
 	if body is Enemy:

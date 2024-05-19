@@ -37,5 +37,4 @@ func _spawn_random_enemy() -> void:
 	new_enemy.enter_world(main_target)
 
 func start():
-	print("game should start")
 	set_process(true)

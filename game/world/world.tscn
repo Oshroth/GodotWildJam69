@@ -325,7 +325,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="WinTimer" type="Timer" parent="."]
-wait_time = 120.0
+wait_time = 240.0
 one_shot = true
 
 [node name="wizard" parent="." instance=ExtResource("16_xb43w")]
