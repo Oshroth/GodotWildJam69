@@ -39,6 +39,7 @@ func setup_towers() -> void:
 		tower_meshes_ghost.append(tower)
 
 func _physics_process(_delta: float) -> void:
+	
 	var point := ScreenPointToRay()
 	point.x = int(point.x)
 	point.z = int(point.z)

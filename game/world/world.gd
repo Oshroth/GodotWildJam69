@@ -39,7 +39,7 @@ func _on_tower_destroyed():
 	level_lost.emit()
 
 func _process(delta):
-	if intro_active and Input.is_action_just_pressed("ui_cancel"):
+	if intro_active and Input.is_action_just_pressed("skip_dialog"):
 		baby_tween.kill()
 		dialog_index = dialog.size()
 		audio_stream_player.stop()
@@ -86,5 +86,6 @@ func _on_intro_cutscene_animation_finished(anim_name):
 func fade_music(to_action:bool = true):
 	if to_action:
 		var t = create_tween().set_parallel(true)
-		t.tween_property(music_slow,"volume_db",-80,0.2)
+		#t.tween_property(music_slow,"volume_db",-80,0.2)
+		music_slow.volume_db = 0
 		music_fast.volume_db = 0

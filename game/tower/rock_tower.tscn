@@ -106,6 +106,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.503898, -0.646438)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_7yfvk")
 volume_db = -15.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="TargetFinder" to="." method="_on_target_finder_body_entered"]
 
