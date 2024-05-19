@@ -192,6 +192,7 @@ mesh = SubResource("PlaneMesh_fwq5o")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape3D_jx5kv")
@@ -211,7 +212,7 @@ volume_db = -10.0
 bus = &"SFX"
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="TowerPlacer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 37.1325)
+visible = false
 enabled = false
 shape = SubResource("BoxShape3D_0oave")
 target_position = Vector3(0, 0, 0)
