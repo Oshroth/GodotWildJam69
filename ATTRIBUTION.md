@@ -1,10 +1,10 @@
 # Attribution
 ## Collaborators
-Iain Mc [itch.io](https://iainmcclosky.itch.io/)
-Oshroth [itch.io](https://oshroth.itch.io/)
-Otter
-Nathan Hold [itch.io](https://nhold.itch.io/)
-Samu samu1407 [itch.io](https://samu1407.itch.io/)
+Iain McClosky Sound Designer [iainmcclosky.itch.io](https://iainmcclosky.itch.io/)
+Oshroth Developer [oshroth.itch.io](https://oshroth.itch.io/)
+Otter Eve Composer [ottereveaudio.itch.io](https://ottereveaudio.itch.io/)
+Nathan Hold Developer [nhold.itch.io](https://nhold.itch.io/)
+Samu1407 3D Art [samu1407.itch.io](https://samu1407.itch.io/)
 
 ## Tools
 
