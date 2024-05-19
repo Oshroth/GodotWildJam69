@@ -1,5 +1,8 @@
 extends Node3D
 
+signal level_lost
+signal level_won
+
 @export var dialog:Array[String]
 @onready var enemy_spawner = $EnemySpawner
 @onready var dialog_label = $DialogUI/ColorRect/dialog_label
@@ -7,6 +10,7 @@ extends Node3D
 @onready var canvas_layer = $MageTower/CanvasLayer
 @onready var dialog_ui = $DialogUI
 @onready var win_timer = $WinTimer
+@onready var mage_tower: MageTower = $MageTower
 
 
 var baby_tween:Tween
@@ -22,10 +26,13 @@ func _ready():
 	game_ui.hide()
 	canvas_layer.hide()
 	manage_intro()
-	
+	mage_tower.tower_destroyed.connect(_on_tower_destroyed)
 
 func _on_win_timer_timeout():
-	print("You win WOWOWOOWWO")
+	level_won.emit()
+
+func _on_tower_destroyed():
+	level_lost.emit()
 
 func _process(delta):
 	if Input.is_action_just_pressed("place_building"):

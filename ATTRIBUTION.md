@@ -1,12 +1,18 @@
 # Attribution
 ## Collaborators
+Iain Mc [itch.io](https://iainmcclosky.itch.io/)
+Oshroth [itch.io](https://oshroth.itch.io/)
+Otter
+Nathan Hold [itch.io](https://nhold.itch.io/)
+Samu samu1407 [itch.io](https://samu1407.itch.io/)
+
+## Tools
 
 ### Godot Game Template
 Author: [Marek Belski and contributors](https://github.com/Maaack/Godot-Game-Template/graphs/contributors)  
 Source: [github: Godot-Game-Template](https://github.com/Maaack/Godot-Game-Template)  
 License: [MIT License](LICENSE.txt)  
 
-## Tools
 #### Godot
 Author: [Juan Linietsky, Ariel Manzur, and contributors](https://godotengine.org/contact)  
 Source: [godotengine.org](https://godotengine.org/)  

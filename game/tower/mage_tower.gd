@@ -1,6 +1,7 @@
 extends Node3D
 class_name MageTower
 
+signal tower_destroyed
 signal gold_changed(gold: int)
 #Hacky way.
 static var instance: MageTower = null
@@ -30,8 +31,7 @@ func damage(amount:float) -> void:
 	$CanvasLayer/ProgressBar.value = current_health
 	$CanvasLayer/ProgressBar.max_value = max_health
 	if current_health <= 0:
-		print("End game")
-		get_tree().reload_current_scene()
+		tower_destroyed.emit()
 
 func play_enemy_death():
 	death_sound.play()
