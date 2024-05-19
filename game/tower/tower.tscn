@@ -669,6 +669,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_ui02p")
+volume_db = -15.0
 bus = &"SFX"
 
 [node name="Visual" type="Node3D" parent="."]

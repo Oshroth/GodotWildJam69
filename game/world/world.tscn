@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dhtricebyue2d"]
+[gd_scene load_steps=44 format=3 uid="uid://dhtricebyue2d"]
 
 [ext_resource type="Script" path="res://game/world/world.gd" id="1_4skrw"]
 [ext_resource type="PackedScene" uid="uid://dik7or3s40a6s" path="res://3DArt/Models/mage_tower.gltf" id="1_ecthc"]
@@ -25,6 +25,7 @@
 [ext_resource type="Animation" uid="uid://l48rarvd4aba" path="res://3DArt/Animations/Player/idle.res" id="20_o8dly"]
 [ext_resource type="AudioStream" uid="uid://red1p3rprwx1" path="res://Audio/GJ69TowerDefense_MX_betweenWaves_-15dB.wav" id="21_pjlca"]
 [ext_resource type="AudioStream" uid="uid://bgtpppexlrbvn" path="res://Audio/GJ69TowerDefense_MX_duringWaves_-15dB.wav" id="22_livjx"]
+[ext_resource type="AudioStream" uid="uid://qhotqm1amyib" path="res://Audio/Wizard_DIalogue.wav" id="24_l6aox"]
 
 [sub_resource type="Environment" id="Environment_6w507"]
 background_mode = 1
@@ -428,6 +429,10 @@ libraries = {
 }
 autoplay = "wizard/idle"
 speed_scale = 2.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="wizard"]
+stream = ExtResource("24_l6aox")
+volume_db = -10.0
 
 [node name="DialogUI" type="CanvasLayer" parent="."]
 
