@@ -25,6 +25,9 @@ var damage_material = preload("res://Shaders/damage_material.tres")
 signal on_death
 
 func _ready():
+	for x in hit_effect_targets:
+		x.material_override = x.get_active_material(0).duplicate()
+		x.get_active_material(0).setup_local_to_scene()
 	animation_player.play(animation_idle)
 	projectile_position.reparent(tower_mesh)
 	health = max_health
