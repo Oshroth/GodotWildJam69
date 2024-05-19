@@ -1,9 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://drmhdg2hprlmb"]
+[gd_scene load_steps=5 format=3 uid="uid://drmhdg2hprlmb"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_game_template/base/scenes/Menus/OptionsMenu/Input/InputOptionsMenu.tscn" id="1_7pecw"]
+[ext_resource type="PackedScene" uid="uid://dp3rgqaehb3xu" path="res://addons/maaacks_game_template/base/scenes/Menus/OptionsMenu/Input/InputOptionsMenu.tscn" id="1_7pecw"]
 [ext_resource type="Script" path="res://scenes/Menus/OptionsMenu/Input/InputOptionsMenu.gd" id="2_4kbmx"]
+[ext_resource type="Texture2D" uid="uid://38t548uxqivt" path="res://2DArt/plus.png" id="3_4skgn"]
+[ext_resource type="Texture2D" uid="uid://cc5gde20if34c" path="res://2DArt/minus.png" id="4_cfhm2"]
 
 [node name="Controls" instance=ExtResource("1_7pecw")]
 script = ExtResource("2_4kbmx")
-add_button_texture = null
-remove_button_texture = null
+action_name_map = {
+"cancel_building": "Cancel Placement",
+"interact": "Interact",
+"move_down": "Down",
+"move_left": "Left",
+"move_right": "Right",
+"move_up": "Up",
+"place_building": "Place Golem",
+"scroll_down": "Zoom Out",
+"scroll_up": "Zoom In",
+"select_tower_1": "Select Tree Golem",
+"select_tower_2": "Select Rock Golem"
+}
+add_button_texture = ExtResource("3_4skgn")
+remove_button_texture = ExtResource("4_cfhm2")

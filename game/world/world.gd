@@ -20,9 +20,13 @@ signal level_won
 
 var baby_tween:Tween
 var talking:bool = false
+var intro_active := true
+var dialog_index : int = 0
 
 
 func _ready():
+	intro_active = true
+	dialog_index = 0
 	game_ui.hide()
 	canvas_layer.hide()
 	manage_intro()
@@ -35,7 +39,11 @@ func _on_tower_destroyed():
 	level_lost.emit()
 
 func _process(delta):
-	if Input.is_action_just_pressed("place_building"):
+	if intro_active and (Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_cancel")):
+		baby_tween.kill()
+		dialog_index = dialog.size()
+		manage_intro()
+	if intro_active and Input.is_action_just_pressed("place_building"):
 		if talking:
 			baby_tween.kill()
 			dialog_label.visible_ratio = 1
@@ -48,13 +56,13 @@ func manage_intro():
 	if baby_tween:
 		baby_tween.kill()
 	
-	if dialog.is_empty():
+	if dialog_index >= dialog.size():
 		dialog_ui.hide()
 		game_ui.show()
 		canvas_layer.show()
 		intro_cutscene.play("walk_to_end")
 	else:
-		var text:String = dialog.pop_front()
+		var text:String = dialog[dialog_index]
 		dialog_label.text = text
 		dialog_label.visible_ratio = 0
 		audio_stream_player.play()
@@ -62,6 +70,7 @@ func manage_intro():
 		baby_tween = create_tween()
 		baby_tween.tween_property(dialog_label,"visible_ratio",1,text.length()/30)
 		baby_tween.finished.connect(tween_finished)
+		dialog_index += 1
 
 func tween_finished():
 	audio_stream_player.stop()
@@ -71,20 +80,10 @@ func _on_intro_cutscene_animation_finished(anim_name):
 		fade_music()
 		win_timer.start()
 		enemy_spawner.start()
-		set_process(false)
+		intro_active = false
 
 func fade_music(to_action:bool = true):
 	if to_action:
-		if music_fast == null:
-			music_fast = AudioStreamPlayer.new()
-			music_fast.autoplay = true
-			music_fast.stream = load("res://Audio/GJ69TowerDefense_MX_duringWaves_-15dB.wav")
-			add_child(music_fast)
-		if music_slow == null:
-			music_slow = AudioStreamPlayer.new()
-			music_slow.autoplay = true
-			music_slow.stream = load("res://Audio/GJ69TowerDefense_MX_betweenWaves_-15dB.wav")
-			add_child(music_slow)
 		var t = create_tween().set_parallel(true)
 		t.tween_property(music_slow,"volume_db",-80,0.2)
 		music_fast.volume_db = 0

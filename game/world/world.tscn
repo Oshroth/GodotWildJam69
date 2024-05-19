@@ -471,11 +471,13 @@ libraries = {
 [node name="MusicSlow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_pjlca")
 autoplay = true
+bus = &"Music"
 
 [node name="MusicFast" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_livjx")
 volume_db = -80.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="gold_changed" from="MageTower" to="TowerPlacer" method="_on_mage_tower_gold_changed"]
 [connection signal="gold_changed" from="MageTower" to="GameUI" method="_on_gold_changed"]
