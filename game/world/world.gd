@@ -12,6 +12,8 @@ signal level_won
 @onready var win_timer = $WinTimer
 @onready var mage_tower: MageTower = $MageTower
 @onready var intro_cutscene = $IntroCutscene
+@onready var music_slow = $MusicSlow
+@onready var music_fast = $MusicFast
 
 
 
@@ -65,11 +67,15 @@ func manage_intro():
 
 func tween_finished():
 	talking = false
-	
-
-
 
 func _on_intro_cutscene_animation_finished(anim_name):
+		fade_music()
 		win_timer.start()
 		enemy_spawner.start()
 		set_process(false)
+
+func fade_music(to_action:bool = true):
+	if to_action:
+		var t = create_tween().set_parallel(true)
+		t.tween_property(music_slow,"volume_db",-80,2.0)
+		t.tween_property(music_fast,"volume_db",0,2.0)

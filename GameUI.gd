@@ -9,6 +9,9 @@ var buildings: Array[Building]
 var build_buttons: Array[BuildingButton]
 
 @onready var building_panel: BoxContainer = $BuildingPanel
+@onready var label = $Label
+@onready var win_timer = $"../WinTimer"
+
 
 func _ready() -> void:
 	
@@ -20,11 +23,14 @@ func _ready() -> void:
 		button.pressed.connect(building_button_tapped.bind(building.type))
 		building_panel.add_child(button)
 		build_buttons.append(button)
+	
+	label.text = str(roundf(win_timer.time_left))
 
 func building_button_tapped(type: Building.Type) -> void:
 	buildTower.emit(type)
 
 func _process(_delta: float) -> void:
+	label.text = str(roundf(win_timer.time_left))
 	if Input.is_action_just_pressed("select_tower_1") and !buildings.is_empty():
 		building_button_tapped(buildings[0].type)
 	if Input.is_action_just_pressed("select_tower_2") and buildings.size() >= 2:

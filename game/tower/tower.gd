@@ -56,7 +56,7 @@ func shoot_projectile() -> void:
 		if target == null:
 			animation_player.play(animation_idle)
 			return
-		tower_mesh.look_at(target.position)
+		tower_mesh.look_at(target.global_transform.origin)
 		rotation.x = 0
 		rotation.z = 0
 		var new_projectile:Projectile = projectile.instantiate()
